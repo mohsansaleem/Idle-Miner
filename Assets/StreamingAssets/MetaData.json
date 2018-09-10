@@ -1,0 +1,485 @@
+{
+  "Shafts": {
+    "S1": [
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 10,
+        "WorkerCapacity": 50,
+        "UpgradeCost": 0
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 15,
+        "WorkerCapacity": 60,
+        "UpgradeCost": 100
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 20,
+        "WorkerCapacity": 70,
+        "UpgradeCost": 1000
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 25,
+        "WorkerCapacity": 80,
+        "UpgradeCost": 3000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 30,
+        "WorkerCapacity": 90,
+        "UpgradeCost": 5000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 35,
+        "WorkerCapacity": 100,
+        "UpgradeCost": 8000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 40,
+        "WorkerCapacity": 110,
+        "UpgradeCost": 10000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 50,
+        "WorkerCapacity": 120,
+        "UpgradeCost": 20000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 60,
+        "WorkerCapacity": 130,
+        "UpgradeCost": 50000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 70,
+        "WorkerCapacity": 150,
+        "UpgradeCost": 100000
+      }
+    ],
+    "S2": [
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 100,
+        "WorkerCapacity": 500,
+        "UpgradeCost": 0
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 150,
+        "WorkerCapacity": 600,
+        "UpgradeCost": 1000
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 200,
+        "WorkerCapacity": 700,
+        "UpgradeCost": 2000
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 250,
+        "WorkerCapacity": 800,
+        "UpgradeCost": 5000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 300,
+        "WorkerCapacity": 900,
+        "UpgradeCost": 10000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 350,
+        "WorkerCapacity": 1000,
+        "UpgradeCost": 50000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 400,
+        "WorkerCapacity": 1100,
+        "UpgradeCost": 100000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 500,
+        "WorkerCapacity": 1200,
+        "UpgradeCost": 500000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 600,
+        "WorkerCapacity": 1300,
+        "UpgradeCost": 800000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 700,
+        "WorkerCapacity": 1500,
+        "UpgradeCost": 1000000
+      }
+    ],
+    "S3": [
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 100,
+        "WorkerCapacity": 500,
+        "UpgradeCost": 0
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 150,
+        "WorkerCapacity": 600,
+        "UpgradeCost": 1000
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 200,
+        "WorkerCapacity": 700,
+        "UpgradeCost": 2000
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 250,
+        "WorkerCapacity": 800,
+        "UpgradeCost": 5000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 300,
+        "WorkerCapacity": 900,
+        "UpgradeCost": 10000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 350,
+        "WorkerCapacity": 1000,
+        "UpgradeCost": 50000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 400,
+        "WorkerCapacity": 1100,
+        "UpgradeCost": 100000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 500,
+        "WorkerCapacity": 1200,
+        "UpgradeCost": 500000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 600,
+        "WorkerCapacity": 1300,
+        "UpgradeCost": 800000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 700,
+        "WorkerCapacity": 1500,
+        "UpgradeCost": 1000000
+      }
+    ],
+    "S4": [
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 100,
+        "WorkerCapacity": 500,
+        "UpgradeCost": 0
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 150,
+        "WorkerCapacity": 600,
+        "UpgradeCost": 1000
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 200,
+        "WorkerCapacity": 700,
+        "UpgradeCost": 2000
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 250,
+        "WorkerCapacity": 800,
+        "UpgradeCost": 5000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 300,
+        "WorkerCapacity": 900,
+        "UpgradeCost": 10000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 350,
+        "WorkerCapacity": 1000,
+        "UpgradeCost": 50000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 400,
+        "WorkerCapacity": 1100,
+        "UpgradeCost": 100000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 500,
+        "WorkerCapacity": 1200,
+        "UpgradeCost": 500000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 600,
+        "WorkerCapacity": 1300,
+        "UpgradeCost": 800000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 700,
+        "WorkerCapacity": 1500,
+        "UpgradeCost": 1000000
+      }
+    ],
+    "S5": [
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 100,
+        "WorkerCapacity": 500,
+        "UpgradeCost": 0
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 150,
+        "WorkerCapacity": 600,
+        "UpgradeCost": 1000
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 200,
+        "WorkerCapacity": 700,
+        "UpgradeCost": 2000
+      },
+      {
+        "Miners": 1,
+        "WalkSpeed": 2,
+        "MinningSpeed": 250,
+        "WorkerCapacity": 800,
+        "UpgradeCost": 5000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 300,
+        "WorkerCapacity": 900,
+        "UpgradeCost": 10000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 350,
+        "WorkerCapacity": 1000,
+        "UpgradeCost": 50000
+      },
+      {
+        "Miners": 2,
+        "WalkSpeed": 2,
+        "MinningSpeed": 400,
+        "WorkerCapacity": 1100,
+        "UpgradeCost": 100000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 500,
+        "WorkerCapacity": 1200,
+        "UpgradeCost": 500000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 600,
+        "WorkerCapacity": 1300,
+        "UpgradeCost": 800000
+      },
+      {
+        "Miners": 3,
+        "WalkSpeed": 2,
+        "MinningSpeed": 700,
+        "WorkerCapacity": 1500,
+        "UpgradeCost": 1000000
+      }
+    ]
+  },
+  "Elevator": [
+    {
+      "MovementSpeed": 1,
+      "LoadingSpeed": 1200,
+      "Load": 20000,
+      "UpgradeCost": 0
+    },
+    {
+      "MovementSpeed": 1.01,
+      "LoadingSpeed": 1300,
+      "Load": 21000,
+      "UpgradeCost": 10000
+    },
+    {
+      "MovementSpeed": 1.02,
+      "LoadingSpeed": 1400,
+      "Load": 22000,
+      "UpgradeCost": 20000
+    },
+    {
+      "MovementSpeed": 1.03,
+      "LoadingSpeed": 1500,
+      "Load": 23000,
+      "UpgradeCost": 50000
+    },
+    {
+      "MovementSpeed": 1.04,
+      "LoadingSpeed": 1600,
+      "Load": 24000,
+      "UpgradeCost": 100000
+    },
+    {
+      "MovementSpeed": 1.05,
+      "LoadingSpeed": 1700,
+      "Load": 25000,
+      "UpgradeCost": 200000
+    }
+  ],
+  "Managers": {
+    "MinningManagers": [
+      {
+        "Name": "Kecia Kinding",
+        "HiringCost": 1000,
+        "Id": "M1"
+      },
+      {
+        "Name": "Earl Evelyn",
+        "HiringCost": 2000,
+        "Id": "M2"
+      },
+      {
+        "Name": "Cody Casner",
+        "HiringCost": 5000,
+        "Id": "M3"
+      },
+      {
+        "Name": "Alfredo Aguirre",
+        "HiringCost": 10000,
+        "Id": "M4"
+      },
+      {
+        "Name": "Noble Netherton",
+        "HiringCost": 50000,
+        "Id": "M5"
+      }
+    ],
+    "ElevatorManagers": [
+      {
+        "Name": "Kaka Nicko",
+        "HiringCost": 1000,
+        "Id": "E1"
+      },
+      {
+        "Name": "Early Bird",
+        "HiringCost": 2000,
+        "Id": "E2"
+      }
+    ],
+    "WareHouseManagers": [
+      {
+        "Name": "Kind King",
+        "HiringCost": 1000,
+        "Id": "W1"
+      },
+      {
+        "Name": "Evelyn Sindy",
+        "HiringCost": 2000,
+        "Id": "W2"
+      }
+    ]
+  },
+  "Warehouse": [
+    {
+      "Transporters": 1,
+      "LoadingSpeed": 1200,
+      "LoadperTransporter": 20000,
+      "Walkspeed": 2,
+      "UpgradeCost": 0
+    },
+    {
+      "Transporters": 1,
+      "LoadingSpeed": 2200,
+      "LoadperTransporter": 40000,
+      "Walkspeed": 2,
+      "UpgradeCost": 1000
+    },
+    {
+      "Transporters": 2,
+      "LoadingSpeed": 5200,
+      "LoadperTransporter": 80000,
+      "Walkspeed": 2,
+      "UpgradeCost": 10000
+    },
+    {
+      "Transporters": 2,
+      "LoadingSpeed": 8200,
+      "LoadperTransporter": 100000,
+      "Walkspeed": 2,
+      "UpgradeCost": 100000
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "Shafts": [
+    {
+      "Id": "S1",
+      "Level": 1,
+      "Manager": "M1",
+      "BinCash": 0.0
+    }
+  ],
+  "ManagersUnlocked": {
+    "MinningManagers": [
+      {
+        "Id": "S1",
+        "PurchaseTime": "0001-01-01T00:00:00"
+      }
+    ],
+    "ElevatorManagers": [
+      {
+        "Id": "E1",
+        "PurchaseTime": "0001-01-01T00:00:00"
+      }
+    ],
+    "WareHouseManagers": [
+      {
+        "Id": "W1",
+        "PurchaseTime": "0001-01-01T00:00:00"
+      }
+    ]
+  },
+  "IdleCash": 1200.0,
+  "Cash": 2000.0,
+  "SuperCash": 1000.0
+}
