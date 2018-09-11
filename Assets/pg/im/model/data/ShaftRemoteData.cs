@@ -10,7 +10,7 @@ namespace pg.im.model.data
     {
         [JsonProperty("Id")]
         public string ShaftId;
-
+        
         [JsonProperty("Level")]
         public int ShaftLevel;
 
@@ -19,5 +19,11 @@ namespace pg.im.model.data
         
         [JsonProperty("BinCash")]
         public double BinCash;
+
+        [JsonProperty("Miners")]
+        public List<MinerRemoteData> Miners;
+
+        [JsonIgnore]
+        public ShaftLevelData ShaftLevelData { get; set; }
     }
 }

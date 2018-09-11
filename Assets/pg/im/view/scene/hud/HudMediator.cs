@@ -1,18 +1,9 @@
 ﻿using pg.core;
-using pg.core.installer;
-using pg.im.installer;
-using pg.im.model;
-using pg.im.view;
 using System;
-using System.Collections.Generic;
 using UniRx;
-using UnityEngine;
-using RSG;
 using Zenject;
-using System.IO;
-using pg.im.view.scene;
-using pg.im.view.popup.popupconfig;
-using pg.im.view.popup.popupresult;
+using pg.im.model.remote;
+using pg.im.model.scene;
 
 namespace pg.im.view
 {

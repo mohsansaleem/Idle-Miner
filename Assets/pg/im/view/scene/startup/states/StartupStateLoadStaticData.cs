@@ -1,8 +1,9 @@
-﻿using pg.im.installer;
-using RSG;
-using UnityEngine;
+﻿using UnityEngine;
 
-using pg.im.model;
+using pg.im.installer;
+using RSG;
+
+using pg.im.model.scene;
 
 namespace pg.im.view
 {

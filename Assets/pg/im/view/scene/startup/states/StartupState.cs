@@ -1,8 +1,5 @@
 ﻿using pg.core;
-using pg.im.model;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using pg.im.model.scene;
 
 namespace pg.im.view
 {

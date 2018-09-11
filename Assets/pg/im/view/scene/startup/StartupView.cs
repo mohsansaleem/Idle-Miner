@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using pg.im.model;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace pg.im.view

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using pg.core.view;
 
 namespace pg.im.view.popup.popupconfig

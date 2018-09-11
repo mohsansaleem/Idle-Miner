@@ -1,7 +1,6 @@
 ﻿using pg.core.installer;
-using pg.im.view.popup.popupconfig;
-using pg.im.view.popup.popupresult;
 using pg.im.view.scene;
+using pg.im.model.scene;
 
 namespace pg.im.view
 {
@@ -24,7 +23,7 @@ namespace pg.im.view
                 (
                     () =>
                     {
-                        StartupModel.LoadingProgress.Value = model.StartupModel.ELoadingProgress.PopupLoaded;
+                        StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.PopupLoaded;
 
                         // Testing Popup
                         //#if UNITY_EDITOR && DEBUG

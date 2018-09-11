@@ -5,5 +5,6 @@ namespace pg.im.view
     {
         public const string MetaDataFile = "MetaData.json";
         public const string GameStateFile = "GameState.json";
+        public const double SaveGameDelay = 5;
     }
 }

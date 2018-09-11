@@ -16,6 +16,25 @@ MonoBehaviour:
     - ShaftId: S1
       ShaftLevel: 1
       Manager: M1
+      BinCash: 0
+      Miners:
+      - MinedCash: 0
+        CurrentLocation: 0
+        MinerState: 0
+    Elevator:
+      ElevatorLevel: 1
+      StoredCash: 0
+      LoadedCash: 0
+      CurrentLocation: 0
+      Manager: E1
+      ElevatorState: 0
+    Warehouse:
+      WarehouseLevel: 1
+      Manager: W1
+      Transporters:
+      - LoadedCash: 0
+        CurrentLocation: 0
+        TransporterState: 0
     Managers:
       MinningManagers:
       - ManagerId: S1

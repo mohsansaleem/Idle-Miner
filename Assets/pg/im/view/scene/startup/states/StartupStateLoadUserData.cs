@@ -1,8 +1,7 @@
 ﻿using pg.im.installer;
 using RSG;
-using UnityEngine;
 
-using pg.im.model;
+using pg.im.model.scene;
 
 namespace pg.im.view
 {

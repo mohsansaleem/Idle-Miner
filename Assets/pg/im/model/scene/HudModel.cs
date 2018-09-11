@@ -1,8 +1,6 @@
-﻿using System;
-using Zenject;
-using UniRx;
+﻿using UniRx;
 
-namespace pg.im.model
+namespace pg.im.model.scene
 {
     public class HudModel
     {

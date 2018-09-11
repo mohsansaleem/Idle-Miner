@@ -1,8 +1,7 @@
 ﻿using pg.core.installer;
-using pg.im.command;
 using pg.im.model;
-using RSG;
-using Zenject;
+using pg.im.model.remote;
+using pg.im.model.scene;
 
 namespace pg.im.installer
 {
@@ -16,6 +15,10 @@ namespace pg.im.installer
             Container.Bind<StaticDataModel>().AsSingle();
             Container.Bind<RemoteDataModel>().AsSingle();
             Container.Bind<HudModel>().AsSingle();
+
+            Container.BindFactory<ShaftRemoteDataModel, ShaftRemoteDataModel.Factory>();
+            Container.BindFactory<ElevatorRemoteDataModel, ElevatorRemoteDataModel.Factory>();
+            Container.BindFactory<WarehouseRemoteDataModel, WarehouseRemoteDataModel.Factory>();
         }
     }
 }

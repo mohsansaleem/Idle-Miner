@@ -1,11 +1,9 @@
 ﻿using pg.im.installer;
 using RSG;
 using UnityEngine;
-
-using pg.im.model;
 using pg.im.model.data;
-using Newtonsoft.Json;
-using System;
+using pg.im.model.remote;
+using pg.im.model.scene;
 
 namespace pg.im.view
 {

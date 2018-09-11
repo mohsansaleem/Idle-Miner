@@ -1,7 +1,7 @@
 ﻿using pg.im.view.popup;
 using UniRx;
 
-namespace pg.im.model
+namespace pg.im.model.scene
 {
     public class PopupSystemDataModel
     {

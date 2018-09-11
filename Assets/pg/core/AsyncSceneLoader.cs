@@ -3,7 +3,6 @@ using RSG;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
-using pg.core;
 
 namespace pg.core
 {

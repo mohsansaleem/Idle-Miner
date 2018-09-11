@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Zenject;
 using UniRx;
-using pg.im.model;
 using pg.core.view;
 using pg.im.view.popup.popupconfig;
+using pg.im.model.scene;
 
 namespace pg.im.view.popup
 {

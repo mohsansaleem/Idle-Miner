@@ -8,7 +8,7 @@ namespace pg.im.model.data
         public int Miners;
 
         [JsonProperty("WalkSpeed")]
-        public float WalkSpeed;
+        public int WalkSpeed;
 
         [JsonProperty("MinningSpeed")]
         public double MinningSpeed;

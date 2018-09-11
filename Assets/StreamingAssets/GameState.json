@@ -4,9 +4,35 @@
       "Id": "S1",
       "Level": 1,
       "Manager": "M1",
-      "BinCash": 0.0
+      "BinCash": 50.0,
+      "Miners": [
+        {
+          "MinedCash": 0.0,
+          "CurrentLocation": 6,
+          "MinerState": 10
+        }
+      ]
     }
   ],
+  "Elevator": {
+    "ElevatorLevel": 1,
+    "StoredCash": 0.0,
+    "LoadedCash": 0.0,
+    "CurrentLocation": 4,
+    "Manager": "E1",
+    "ElevatorState": 5
+  },
+  "Warehouse": {
+    "Level": 1,
+    "Manager": "W1",
+    "Transporters": [
+      {
+        "LoadedCash": 50.0,
+        "CurrentLocation": 8,
+        "TransporterState": 20
+      }
+    ]
+  },
   "ManagersUnlocked": {
     "MinningManagers": [
       {
@@ -28,6 +54,7 @@
     ]
   },
   "IdleCash": 1200.0,
-  "Cash": 2000.0,
-  "SuperCash": 1000.0
+  "Cash": 3100.0,
+  "SuperCash": 1000.0,
+  "LastSaved": "2018-09-12T02:17:11.9043631+05:00"
 }

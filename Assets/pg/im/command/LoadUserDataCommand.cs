@@ -1,16 +1,14 @@
 ﻿using Zenject;
 using UnityEngine;
 using Newtonsoft.Json;
-using pg.im.model;
 using pg.im.model.data;
-using pg.im.installer;
-using pg.im.view.popup.popupconfig;
-using pg.im.view.popup.popupresult;
 using pg.core.command;
 using RSG;
 using System;
 using pg.im.view;
 using System.IO;
+using pg.im.model.remote;
+using pg.im.model.scene;
 
 namespace pg.im.command
 {

@@ -5,7 +5,7 @@ namespace pg.im.model.data
     public class ElevatorLevelData
     {
         [JsonProperty("MovementSpeed")]
-        public float MovementSpeed;
+        public int MovementSpeed;
 
         [JsonProperty("LoadingSpeed")]
         public double LoadingSpeed;

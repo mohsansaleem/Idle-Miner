@@ -230,6 +230,30 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
+        type: 2}
+      propertyPath: m_text
+      value: Idle Cash
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209730708962172, guid: b973041a4f759194595c3d5b8e7e9a9a, type: 2}
+      propertyPath: m_Name
+      value: Idle Cash
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b973041a4f759194595c3d5b8e7e9a9a, type: 2}
   m_IsPrefabAsset: 0
@@ -998,10 +1022,15 @@ Prefab:
       propertyPath: m_Name
       value: Cash
       objectReference: {fileID: 0}
-    - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
+    - target: {fileID: 114432039413540860, guid: b973041a4f759194595c3d5b8e7e9a9a,
         type: 2}
-      propertyPath: m_text
-      value: Cash
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114432039413540860, guid: b973041a4f759194595c3d5b8e7e9a9a,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
         type: 2}
@@ -1011,21 +1040,6 @@ Prefab:
     - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
-        type: 2}
-      propertyPath: m_textInfo.characterCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
-        type: 2}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102846000193228, guid: b973041a4f759194595c3d5b8e7e9a9a,
-        type: 2}
-      propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

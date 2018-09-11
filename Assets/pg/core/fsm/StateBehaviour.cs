@@ -1,5 +1,4 @@
-﻿using pg.core.view;
-using UniRx;
+﻿using UniRx;
 using UnityEngine;
 
 namespace pg.core

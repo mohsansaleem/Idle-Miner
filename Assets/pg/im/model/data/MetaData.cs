@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace pg.im.model.data
 {
@@ -15,5 +13,17 @@ namespace pg.im.model.data
 
         [JsonProperty("Managers")]
         public ManagersData Managers;
+
+        [JsonProperty("Warehouse")]
+        public List<WarehouseLevelData> Warehouse;
+
+        [JsonProperty("MineLength")]
+        public int MineLength;
+
+        [JsonProperty("ShaftDistance")]
+        public int ShaftDepth;
+
+        [JsonProperty("WarehouseDistance")]
+        public int WarehouseDistance;
     }
 }

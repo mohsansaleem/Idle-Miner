@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace pg.im.model.data
 {
@@ -11,6 +9,12 @@ namespace pg.im.model.data
     {
         [JsonProperty("Shafts")]
         public List<ShaftRemoteData> UserShafts;
+
+        [JsonProperty("Elevator")]
+        public ElevatorRemoteData Elevator;
+
+        [JsonProperty("Warehouse")]
+        public WarehouseRemoteData Warehouse;
 
         [JsonProperty("ManagersUnlocked")]
         public ManagersRemoteData Managers;
@@ -23,5 +27,8 @@ namespace pg.im.model.data
 
         [JsonProperty("SuperCash")]
         public double SuperCash;
+
+        [JsonProperty("LastSaved")]
+        public DateTime LastSaved;
     }
 }

@@ -11,5 +11,8 @@ namespace pg.im.model.data
 
         [JsonProperty("PurchaseTime")]
         public DateTime PurchaseTime;
+
+        [JsonIgnore]
+        public ManagerData ManagerData { get; set; }
     }
 }

@@ -1,18 +1,9 @@
 ﻿using pg.core;
-using pg.core.installer;
-using pg.im.installer;
-using pg.im.model;
-using pg.im.view;
+using pg.im.model.remote;
+using pg.im.model.scene;
 using System;
-using System.Collections.Generic;
 using UniRx;
-using UnityEngine;
-using RSG;
 using Zenject;
-using System.IO;
-using pg.im.view.scene;
-using pg.im.view.popup.popupconfig;
-using pg.im.view.popup.popupresult;
 
 namespace pg.im.view
 {
@@ -21,6 +12,7 @@ namespace pg.im.view
         [Inject] private readonly GamePlayView _view;
 
         [Inject] private readonly GamePlayModel _gamePlayModel;
+        [Inject] private readonly RemoteDataModel _remoteDataModel;
 
         public GamePlayMediator()
         {
@@ -32,6 +24,11 @@ namespace pg.im.view
             base.Initialize();
             
             _stateBehaviours.Add(typeof(GamePlayStateDefault), new GamePlayStateDefault(this));
+            
+            foreach(ShaftRemoteDataModel shaft in _remoteDataModel.Shafts)
+            {
+                shaft.BinCash.Subscribe((cash) => { UnityEngine.Debug.LogError(shaft._shaftRemoteData.ShaftId + " has cash: " + cash); }).AddTo(_disposables);
+            }
 
             _gamePlayModel.GamePlayState.Subscribe(OnLoadingProgressChanged).AddTo(_disposables);
         }

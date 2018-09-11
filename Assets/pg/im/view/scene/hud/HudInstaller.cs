@@ -1,7 +1,4 @@
-﻿using pg.im.command;
-using pg.im.installer;
-using RSG;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace pg.im.view

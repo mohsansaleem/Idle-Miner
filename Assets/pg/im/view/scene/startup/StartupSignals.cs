@@ -6,6 +6,7 @@ namespace pg.im.installer
 {
     public class LoadStaticDataSignal : Signal<Promise, LoadStaticDataSignal> { }
     public class LoadUserDataSignal : Signal<Promise, LoadUserDataSignal> { }
+    public class SaveUserDataSignal : Signal<SaveUserDataSignal> { }
     public class CreateUserDataSignal : Signal<CreateUserDataSignalParams, CreateUserDataSignal> { }
     public class CreateUserDataSignalParams
     {

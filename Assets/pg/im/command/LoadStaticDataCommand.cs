@@ -3,7 +3,6 @@ using pg.im.model;
 using pg.im.model.data;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using RSG;
 using Zenject;

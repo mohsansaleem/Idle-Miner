@@ -1,6 +1,6 @@
 ﻿using pg.core.installer;
 using pg.im.view.scene;
-using pg.im.model;
+using pg.im.model.scene;
 
 namespace pg.im.view
 {

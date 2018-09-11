@@ -1,7 +1,4 @@
-﻿using pg.im.command;
-using pg.im.installer;
-using pg.im.model;
-using RSG;
+﻿using pg.im.model.scene;
 using UnityEngine;
 using Zenject;
 

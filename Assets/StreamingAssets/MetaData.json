@@ -369,31 +369,31 @@
       "UpgradeCost": 0
     },
     {
-      "MovementSpeed": 1.01,
+      "MovementSpeed": 1,
       "LoadingSpeed": 1300,
       "Load": 21000,
       "UpgradeCost": 10000
     },
     {
-      "MovementSpeed": 1.02,
+      "MovementSpeed": 2,
       "LoadingSpeed": 1400,
       "Load": 22000,
       "UpgradeCost": 20000
     },
     {
-      "MovementSpeed": 1.03,
+      "MovementSpeed": 2,
       "LoadingSpeed": 1500,
       "Load": 23000,
       "UpgradeCost": 50000
     },
     {
-      "MovementSpeed": 1.04,
+      "MovementSpeed": 2,
       "LoadingSpeed": 1600,
       "Load": 24000,
       "UpgradeCost": 100000
     },
     {
-      "MovementSpeed": 1.05,
+      "MovementSpeed": 2,
       "LoadingSpeed": 1700,
       "Load": 25000,
       "UpgradeCost": 200000
@@ -481,5 +481,8 @@
       "Walkspeed": 2,
       "UpgradeCost": 100000
     }
-  ]
+  ],
+  "MineLength": 8,
+  "ShaftDistance": 4,
+  "WarehouseDistance": 10
 }
