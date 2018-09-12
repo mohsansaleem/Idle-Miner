@@ -2,14 +2,17 @@
 using UnityEngine.UI;
 using TMPro;
 
-public class TopPanelWidget : MonoBehaviour
+namespace pg.im.view
 {
-    public TextMeshProUGUI Value;
-    public Slider Slider;
-
-    public void SetData(double current, double total)
+    public class TopPanelWidget : MonoBehaviour
     {
-        Value.text = current.ToString();
-        Slider.value = (float)(current / total);
+        public TextMeshProUGUI Value;
+        public Slider Slider;
+
+        public void SetData(double current, double total)
+        {
+            Value.text = current.ToShort();
+            Slider.value = (float)(current / total);
+        }
     }
 }

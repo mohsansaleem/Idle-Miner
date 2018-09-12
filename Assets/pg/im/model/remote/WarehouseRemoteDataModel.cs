@@ -12,16 +12,29 @@ namespace pg.im.model.remote
 
         private CompositeDisposable _disposables;
 
-        public WarehouseRemoteData _warehouseRemoteData;
+        public ReactiveProperty<WarehouseRemoteData> ReactiveWarehouse;
+
+        public WarehouseRemoteData WarehouseRemoteData
+        {
+            get
+            {
+                return ReactiveWarehouse.Value;
+            }
+            set
+            {
+                ReactiveWarehouse.SetValueAndForceNotify(value);
+            }
+        }
 
         public WarehouseRemoteDataModel()
         {
+            ReactiveWarehouse = new ReactiveProperty<WarehouseRemoteData>();
             _disposables = new CompositeDisposable();
         }
 
         public void SeedWarehouseRemoteData(WarehouseRemoteData warehouseRemoteData)
         {
-            this._warehouseRemoteData = warehouseRemoteData;
+            this.WarehouseRemoteData = warehouseRemoteData;
 
             if (warehouseRemoteData.WarehouseLevelData == null)
             {
@@ -38,12 +51,14 @@ namespace pg.im.model.remote
 
         private void Tick()
         {
-            if (!(_warehouseRemoteData == null || _warehouseRemoteData.WarehouseLevelData == null))
+            if (!(WarehouseRemoteData == null || WarehouseRemoteData.WarehouseLevelData == null))
             {
-                foreach (TransporterRemoteData transporter in _warehouseRemoteData.Transporters)
+                foreach (TransporterRemoteData transporter in WarehouseRemoteData.Transporters)
                 {
                     TransporterTick(transporter);
                 }
+
+                ReactiveWarehouse.SetValueAndForceNotify(WarehouseRemoteData);
             }
         }
 
@@ -52,34 +67,34 @@ namespace pg.im.model.remote
             switch (transporter.TransporterState)
             {
                 case ETransporterState.Idle:
-                    if (!string.IsNullOrEmpty(_warehouseRemoteData.Manager))
+                    if (!string.IsNullOrEmpty(WarehouseRemoteData.Manager))
                     {
                         transporter.TransporterState = ETransporterState.WalkingToElevator;
                     }
                     break;
                 case ETransporterState.WalkingToElevator:
-                    if ((transporter.CurrentLocation += (int)_warehouseRemoteData.WarehouseLevelData.WalkSpeed) >= _staticDataModel.MetaData.WarehouseDistance)
+                    if ((transporter.CurrentLocation += (int)WarehouseRemoteData.WarehouseLevelData.WalkSpeed) >= _staticDataModel.MetaData.WarehouseDistance)
                     {
                         transporter.TransporterState = ETransporterState.Loading;
                     }
                     break;
                 case ETransporterState.WalkingToWarehouse:
-                    if ((transporter.CurrentLocation -= (int)_warehouseRemoteData.WarehouseLevelData.WalkSpeed) <= 0)
+                    if ((transporter.CurrentLocation -= (int)WarehouseRemoteData.WarehouseLevelData.WalkSpeed) <= 0)
                     {
                         AddCash(transporter.LoadedCash);
                         transporter.LoadedCash = 0;
-                        transporter.TransporterState = _warehouseRemoteData.Manager == null ? ETransporterState.Idle : ETransporterState.WalkingToElevator;
+                        transporter.TransporterState = WarehouseRemoteData.Manager == null ? ETransporterState.Idle : ETransporterState.WalkingToElevator;
                     }
                     break;
                 case ETransporterState.Loading:
-                    double cashToLoad = _warehouseRemoteData.WarehouseLevelData.LoadingSpeed;
-                    if (transporter.LoadedCash + cashToLoad > _warehouseRemoteData.WarehouseLevelData.LoadPerTransporter)
-                        cashToLoad = _warehouseRemoteData.WarehouseLevelData.LoadPerTransporter - transporter.LoadedCash;
+                    double cashToLoad = WarehouseRemoteData.WarehouseLevelData.LoadingSpeed;
+                    if (transporter.LoadedCash + cashToLoad > WarehouseRemoteData.WarehouseLevelData.LoadPerTransporter)
+                        cashToLoad = WarehouseRemoteData.WarehouseLevelData.LoadPerTransporter - transporter.LoadedCash;
                     double cashLoaded = _remoteDataModel.Elevator.RemoveStoredCash(cashToLoad);
 
                     transporter.LoadedCash += cashLoaded;
 
-                    if (cashToLoad != cashLoaded || transporter.LoadedCash == _warehouseRemoteData.WarehouseLevelData.LoadPerTransporter)
+                    if (cashToLoad != cashLoaded || transporter.LoadedCash == WarehouseRemoteData.WarehouseLevelData.LoadPerTransporter)
                         transporter.TransporterState = ETransporterState.WalkingToWarehouse;
                     break;
             }

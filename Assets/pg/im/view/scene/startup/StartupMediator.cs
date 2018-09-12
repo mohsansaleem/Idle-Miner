@@ -36,14 +36,6 @@ namespace pg.im.view
         {
             base.Initialize();
 
-            // Testing.
-            UnityEngine.Debug.LogError("122.0: "+(122.0).ToShort());
-            UnityEngine.Debug.LogError("12222.2: "+(12222.2).ToShort());
-            UnityEngine.Debug.LogError("1222222.2: "+(1222222.2).ToShort());
-            UnityEngine.Debug.LogError("12222222222.2: "+(12222222222.2).ToShort());
-            UnityEngine.Debug.LogError("1222222222222.2: "+(1222222222222.2).ToShort());
-            UnityEngine.Debug.LogError("1222222222222222.2: "+(1222222222222222.2).ToShort());
-
             _stateBehaviours.Add(typeof(StartupStateLoadPopup), new StartupStateLoadPopup(this));
             _stateBehaviours.Add(typeof(StartupStateLoadStaticData), new StartupStateLoadStaticData(this));
             _stateBehaviours.Add(typeof(StartupStateLoadUserData), new StartupStateLoadUserData(this));

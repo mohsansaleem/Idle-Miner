@@ -29,7 +29,7 @@ namespace pg.im.view
             _remoteDataModel.Cash.Subscribe(OnCashUpdate).AddTo(_disposables);
             _remoteDataModel.SuperCash.Subscribe(OnSuperCashUpdate).AddTo(_disposables);
 
-            _hudModel.HudState.Subscribe(OnLoadingProgressChanged).AddTo(_disposables);
+            _hudModel.HudState.Subscribe(OnHudStateChanged).AddTo(_disposables);
         }
 
         private void OnIdleCashUpdate(double idleCash)
@@ -47,7 +47,7 @@ namespace pg.im.view
             _view._superCashWidget.SetData(superCash, superCash);
         }
 
-        private void OnLoadingProgressChanged(HudModel.EHudState hudState)
+        private void OnHudStateChanged(HudModel.EHudState hudState)
         {
             Type targetType = null;
             switch (hudState)

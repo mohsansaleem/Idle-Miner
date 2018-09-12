@@ -11,16 +11,23 @@ namespace pg.im.model.remote
         [Inject] private readonly RemoteDataModel _remoteDataModel;
 
         private CompositeDisposable _disposables;
+        public ReactiveProperty<ElevatorRemoteData> ReactiveElevator;
 
-        public ElevatorRemoteData _elevatorRemoteData;
-
-        public ReactiveProperty<double> StoredCash;
-        public ReactiveProperty<double> LoadedCash;
+        public ElevatorRemoteData ElevatorRemoteData
+        {
+            get
+            {
+                return ReactiveElevator.Value;
+            }
+            set
+            {
+                ReactiveElevator.SetValueAndForceNotify(value);
+            }
+        }
 
         public ElevatorRemoteDataModel()
         {
-            StoredCash = new ReactiveProperty<double>(0);
-            LoadedCash = new ReactiveProperty<double>(0);
+            ReactiveElevator = new ReactiveProperty<ElevatorRemoteData>();
             _disposables = new CompositeDisposable();
         }
 
@@ -29,15 +36,12 @@ namespace pg.im.model.remote
             _disposables.Dispose();
             _disposables = new CompositeDisposable();
 
-            this._elevatorRemoteData = elevatorRemoteData;
+            this.ElevatorRemoteData = elevatorRemoteData;
 
             if (elevatorRemoteData.ElevatorLevelData == null)
             {
                 elevatorRemoteData.ElevatorLevelData = _staticDataModel.GetElevatorLevelData(elevatorRemoteData.ElevatorLevel);
             }
-
-            StoredCash.Value = elevatorRemoteData.StoredCash;
-            LoadedCash.Value = elevatorRemoteData.LoadedCash;
 
             Observable.Timer(TimeSpan.FromSeconds(1)).Repeat().Subscribe((interval) => Tick()).AddTo(_disposables);
         }
@@ -45,24 +49,22 @@ namespace pg.im.model.remote
 
         public void SetLoadedCash(double cash)
         {
-            _elevatorRemoteData.LoadedCash = cash;
-            LoadedCash.Value = cash;
+            ElevatorRemoteData.LoadedCash = cash;
         }
 
         public void SetStoredCash(double cash)
         {
-            _elevatorRemoteData.StoredCash = cash;
-            StoredCash.Value = cash;
+            ElevatorRemoteData.StoredCash = cash;
         }
 
         public double RemoveStoredCash(double cash)
         {
-            if (cash > _elevatorRemoteData.StoredCash)
+            if (cash > ElevatorRemoteData.StoredCash)
             {
-                cash = _elevatorRemoteData.StoredCash;
+                cash = ElevatorRemoteData.StoredCash;
             }
 
-            SetStoredCash(_elevatorRemoteData.StoredCash - cash);
+            SetStoredCash(ElevatorRemoteData.StoredCash - cash);
 
             return cash;
         }
@@ -77,73 +79,80 @@ namespace pg.im.model.remote
 
         private void Tick()
         {
-            if (!(_elevatorRemoteData == null || _elevatorRemoteData.ElevatorLevelData == null))
+            if (!(ElevatorRemoteData == null || ElevatorRemoteData.ElevatorLevelData == null))
             {
                 int shaftNumber = 1;
 
                 ShaftRemoteDataModel shaft;
 
-                switch (_elevatorRemoteData.ElevatorState)
+                switch (ElevatorRemoteData.ElevatorState)
                 {
                     case EElevatorState.Idle:
-                        if (!string.IsNullOrEmpty(_elevatorRemoteData.Manager))
+                        if (!string.IsNullOrEmpty(ElevatorRemoteData.Manager))
                         {
-                            _elevatorRemoteData.ElevatorState = EElevatorState.MovingDown;
+                            ElevatorRemoteData.ElevatorState = EElevatorState.MovingDown;
                         }
                         break;
                     case EElevatorState.MovingDown:
 
-                        if (_elevatorRemoteData.CurrentLocation + _elevatorRemoteData.ElevatorLevelData.MovementSpeed > MaxDistance)
+                        if (ElevatorRemoteData.CurrentLocation + ElevatorRemoteData.ElevatorLevelData.MovementSpeed > MaxDistance)
                         {
-                            _elevatorRemoteData.CurrentLocation = MaxDistance;
+                            ElevatorRemoteData.CurrentLocation = MaxDistance;
                         }
                         else
                         {
-                            _elevatorRemoteData.CurrentLocation += _elevatorRemoteData.ElevatorLevelData.MovementSpeed;
+                            ElevatorRemoteData.CurrentLocation += ElevatorRemoteData.ElevatorLevelData.MovementSpeed;
                         }
 
-                        if (_elevatorRemoteData.CurrentLocation % _staticDataModel.MetaData.ShaftDepth == 0)
+                        if (ElevatorRemoteData.CurrentLocation % _staticDataModel.MetaData.ShaftDepth == 0)
                         {
-                            shaftNumber = _elevatorRemoteData.CurrentLocation / _staticDataModel.MetaData.ShaftDepth;
+                            shaftNumber = ElevatorRemoteData.CurrentLocation / _staticDataModel.MetaData.ShaftDepth;
 
                             shaft = _remoteDataModel.Shafts[shaftNumber - 1];
 
-                            if (shaft.BinCash.Value < 1)
+                            if (shaft.ShaftRemoteData.BinCash < 1)
                             {
-                                _elevatorRemoteData.ElevatorState = _elevatorRemoteData.CurrentLocation >= MaxDistance ? EElevatorState.MovingUp : EElevatorState.MovingDown;
+                                ElevatorRemoteData.ElevatorState = ElevatorRemoteData.CurrentLocation >= MaxDistance ? EElevatorState.MovingUp : EElevatorState.MovingDown;
                             }
                             else
-                                _elevatorRemoteData.ElevatorState = EElevatorState.Loading;
+                                ElevatorRemoteData.ElevatorState = EElevatorState.Loading;
                         }
                         break;
                     case EElevatorState.MovingUp:
-                        if ((_elevatorRemoteData.CurrentLocation -= _elevatorRemoteData.ElevatorLevelData.MovementSpeed) <= 0)
+                        if ((ElevatorRemoteData.CurrentLocation -= ElevatorRemoteData.ElevatorLevelData.MovementSpeed) <= 0)
                         {
-                            SetStoredCash(_elevatorRemoteData.StoredCash + _elevatorRemoteData.LoadedCash);
-                            _elevatorRemoteData.LoadedCash = 0;
-                            _elevatorRemoteData.ElevatorState = _elevatorRemoteData.Manager == null ? EElevatorState.Idle : EElevatorState.MovingDown;
+                            SetStoredCash(ElevatorRemoteData.StoredCash + ElevatorRemoteData.LoadedCash);
+                            ElevatorRemoteData.LoadedCash = 0;
+                            ElevatorRemoteData.ElevatorState = ElevatorRemoteData.Manager == null ? EElevatorState.Idle : EElevatorState.MovingDown;
                         }
                         break;
                     case EElevatorState.Loading:
 
-                        shaftNumber = _elevatorRemoteData.CurrentLocation / _staticDataModel.MetaData.ShaftDepth;
+                        shaftNumber = ElevatorRemoteData.CurrentLocation / _staticDataModel.MetaData.ShaftDepth;
 
                         shaft = _remoteDataModel.Shafts[shaftNumber - 1];
 
-                        double cashToLoad = _elevatorRemoteData.ElevatorLevelData.LoadingSpeed;
-                        if (_elevatorRemoteData.LoadedCash + cashToLoad > _elevatorRemoteData.ElevatorLevelData.LoadCapacity)
-                            cashToLoad = _elevatorRemoteData.ElevatorLevelData.LoadCapacity - _elevatorRemoteData.LoadedCash;
+                        double cashToLoad = ElevatorRemoteData.ElevatorLevelData.LoadingSpeed;
+                        if (ElevatorRemoteData.LoadedCash + cashToLoad > ElevatorRemoteData.ElevatorLevelData.LoadCapacity)
+                            cashToLoad = ElevatorRemoteData.ElevatorLevelData.LoadCapacity - ElevatorRemoteData.LoadedCash;
                         double cashLoaded = shaft.RemoveBinCash(cashToLoad);
 
-                        SetLoadedCash(_elevatorRemoteData.LoadedCash + cashLoaded);
+                        SetLoadedCash(ElevatorRemoteData.LoadedCash + cashLoaded);
 
                         // If Bin Empty
-                        if (shaft.BinCash.Value < 1)
+                        if (shaft.ShaftRemoteData.BinCash < 1)
                         {
-                            _elevatorRemoteData.ElevatorState = _elevatorRemoteData.CurrentLocation >= MaxDistance ? EElevatorState.MovingUp : EElevatorState.MovingDown;
+                            ElevatorRemoteData.ElevatorState = ElevatorRemoteData.CurrentLocation >= MaxDistance ? EElevatorState.MovingUp : EElevatorState.MovingDown;
+                        }
+
+                        if (ElevatorRemoteData.LoadedCash == ElevatorRemoteData.ElevatorLevelData.LoadCapacity)
+                        {
+                            ElevatorRemoteData.ElevatorState = EElevatorState.MovingUp;
                         }
                         break;
                 }
+
+                ReactiveElevator.SetValueAndForceNotify(ElevatorRemoteData);
             }
         }
 

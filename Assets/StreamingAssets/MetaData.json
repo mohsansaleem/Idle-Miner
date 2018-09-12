@@ -364,26 +364,26 @@
   "Elevator": [
     {
       "MovementSpeed": 1,
-      "LoadingSpeed": 1200,
-      "Load": 20000,
+      "LoadingSpeed": 100,
+      "Load": 200,
       "UpgradeCost": 0
     },
     {
       "MovementSpeed": 1,
-      "LoadingSpeed": 1300,
-      "Load": 21000,
+      "LoadingSpeed": 300,
+      "Load": 800,
       "UpgradeCost": 10000
     },
     {
       "MovementSpeed": 2,
-      "LoadingSpeed": 1400,
-      "Load": 22000,
+      "LoadingSpeed": 600,
+      "Load": 2000,
       "UpgradeCost": 20000
     },
     {
       "MovementSpeed": 2,
       "LoadingSpeed": 1500,
-      "Load": 23000,
+      "Load": 15000,
       "UpgradeCost": 50000
     },
     {
@@ -455,22 +455,22 @@
   "Warehouse": [
     {
       "Transporters": 1,
-      "LoadingSpeed": 1200,
-      "LoadperTransporter": 20000,
+      "LoadingSpeed": 50,
+      "LoadperTransporter": 200,
       "Walkspeed": 2,
       "UpgradeCost": 0
     },
     {
       "Transporters": 1,
-      "LoadingSpeed": 2200,
-      "LoadperTransporter": 40000,
+      "LoadingSpeed": 200,
+      "LoadperTransporter": 1600,
       "Walkspeed": 2,
       "UpgradeCost": 1000
     },
     {
       "Transporters": 2,
       "LoadingSpeed": 5200,
-      "LoadperTransporter": 80000,
+      "LoadperTransporter": 40000,
       "Walkspeed": 2,
       "UpgradeCost": 10000
     },

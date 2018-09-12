@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using UnityEngine;
+﻿using System.Globalization;
 
 namespace pg.im.view
 {
@@ -11,7 +8,7 @@ namespace pg.im.view
         {
             if (num > 999999999999999999999999.0)
             {
-                return num.ToString("0,,,,,,,.##ac", CultureInfo.InvariantCulture);
+                return num.ToString("0,,,,,,,.##ad", CultureInfo.InvariantCulture);
             }
             else if (num > 999999999999999999999.0)
             {
@@ -39,7 +36,7 @@ namespace pg.im.view
             }
             else if (num > 999)
             {
-                return num.ToString("0,.#K", CultureInfo.InvariantCulture);
+                return num.ToString("0,.##K", CultureInfo.InvariantCulture);
             }
             else
             {

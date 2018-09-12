@@ -32,7 +32,6 @@ namespace pg.im.model.data
         [JsonProperty("ElevatorState")]
         public EElevatorState ElevatorState;
 
-
         [JsonIgnore]
         public ElevatorLevelData ElevatorLevelData { get; set; }
     }

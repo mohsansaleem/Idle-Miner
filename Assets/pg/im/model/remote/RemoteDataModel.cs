@@ -37,10 +37,7 @@ namespace pg.im.model.remote
 
             foreach(var shaftRemoteData in userData.UserShafts)
             {
-                ShaftRemoteDataModel shaft = _shaftRemoteDataModelFactory.Create();
-                shaft.SeedShaftRemoteData(shaftRemoteData);
-
-                Shafts.Add(shaft);
+                AddShaft(shaftRemoteData);
             }
 
             ElevatorRemoteDataModel elevator = _elevatorRemoteDataModelFactory.Create();
@@ -54,6 +51,14 @@ namespace pg.im.model.remote
             IdleCash.Value = userData.IdleCash;
             Cash.Value = userData.Cash;
             SuperCash.Value = userData.SuperCash;
+        }
+
+        public void AddShaft(ShaftRemoteData shaftRemoteData)
+        {
+            ShaftRemoteDataModel shaft = _shaftRemoteDataModelFactory.Create();
+            shaft.SeedShaftRemoteData(shaftRemoteData);
+
+            Shafts.Add(shaft);
         }
 
         public void UpdateCash(double cash)

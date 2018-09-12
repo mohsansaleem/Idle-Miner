@@ -1,4 +1,5 @@
 ﻿using pg.core;
+using pg.im.installer;
 using pg.im.model.remote;
 using pg.im.model.scene;
 using System;
@@ -14,6 +15,8 @@ namespace pg.im.view
         [Inject] private readonly GamePlayModel _gamePlayModel;
         [Inject] private readonly RemoteDataModel _remoteDataModel;
 
+        [Inject] private readonly AddShaftSignal _addShaftSignal;
+
         public GamePlayMediator()
         {
             _disposables = new CompositeDisposable();
@@ -27,13 +30,24 @@ namespace pg.im.view
             
             foreach(ShaftRemoteDataModel shaft in _remoteDataModel.Shafts)
             {
-                shaft.BinCash.Subscribe((cash) => { UnityEngine.Debug.LogError(shaft._shaftRemoteData.ShaftId + " has cash: " + cash); }).AddTo(_disposables);
+                shaft.ReactiveShaft.Subscribe(_view.UpdateShaft).AddTo(_disposables);
             }
 
-            _gamePlayModel.GamePlayState.Subscribe(OnLoadingProgressChanged).AddTo(_disposables);
+            _remoteDataModel.Shafts.ObserveAdd().Subscribe(OnShaftAdd).AddTo(_disposables);
+
+            _remoteDataModel.Warehouse.ReactiveWarehouse.Subscribe(_view.UpdateWarehouse).AddTo(_disposables);
+
+            _remoteDataModel.Elevator.ReactiveElevator.Subscribe((e) => { _view.UpdateElevator(e, _remoteDataModel.Shafts.Count*Constants.ShaftDistance); });
+
+            _gamePlayModel.GamePlayState.Subscribe(OnGamePlayStateChanged).AddTo(_disposables);
         }
 
-        private void OnLoadingProgressChanged(GamePlayModel.EGamePlayState gamePlayState)
+        public void OnShaftAdd(CollectionAddEvent<ShaftRemoteDataModel> evt)
+        {
+            evt.Value.ReactiveShaft.Subscribe(_view.UpdateShaft).AddTo(_disposables);
+        }
+
+        private void OnGamePlayStateChanged(GamePlayModel.EGamePlayState gamePlayState)
         {
             Type targetType = null;
             switch (gamePlayState)
