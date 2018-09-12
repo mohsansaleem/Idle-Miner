@@ -26,6 +26,9 @@ namespace pg.im.model.remote
 
         public void SeedElevatorRemoteData(ElevatorRemoteData elevatorRemoteData)
         {
+            _disposables.Dispose();
+            _disposables = new CompositeDisposable();
+
             this._elevatorRemoteData = elevatorRemoteData;
 
             if (elevatorRemoteData.ElevatorLevelData == null)

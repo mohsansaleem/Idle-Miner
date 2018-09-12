@@ -36,6 +36,14 @@ namespace pg.im.view
         {
             base.Initialize();
 
+            // Testing.
+            UnityEngine.Debug.LogError("122.0: "+(122.0).ToShort());
+            UnityEngine.Debug.LogError("12222.2: "+(12222.2).ToShort());
+            UnityEngine.Debug.LogError("1222222.2: "+(1222222.2).ToShort());
+            UnityEngine.Debug.LogError("12222222222.2: "+(12222222222.2).ToShort());
+            UnityEngine.Debug.LogError("1222222222222.2: "+(1222222222222.2).ToShort());
+            UnityEngine.Debug.LogError("1222222222222222.2: "+(1222222222222222.2).ToShort());
+
             _stateBehaviours.Add(typeof(StartupStateLoadPopup), new StartupStateLoadPopup(this));
             _stateBehaviours.Add(typeof(StartupStateLoadStaticData), new StartupStateLoadStaticData(this));
             _stateBehaviours.Add(typeof(StartupStateLoadUserData), new StartupStateLoadUserData(this));
@@ -84,53 +92,6 @@ namespace pg.im.view
             {
                 GoToState(targetType);
             }
-        }
-
-        private void SeedData()
-        {
-            //LoginData loginData = _remoteDataModel.LoginData;
-            //_workshopRemoteDataModel.WorkshopData = loginData.WorkshopData;
-            //_workshopRemoteDataModel.SeedModules(loginData.PlayerOwnedModules);
-            //_workshopRemoteDataModel.SeedWorkers(loginData.PlayerOwnedWorkers);
-            //_workshopRemoteDataModel.SeedHeroes(loginData.PlayerOwnerHeroes);
-            //_workshopRemoteDataModel.SeedPlacementGrids(loginData.PlacementGrids);
-            
-            //_playerDataModel.SeedPlayerData(loginData.Player);
-            //_playerDataModel.SeedResources(loginData.Resources);
-            //_itemsRemoteDataModel.SeedBlueprints(loginData.PlayerOwnedBlueprints);
-            //_itemsRemoteDataModel.SeedInventoryItems(loginData.ItemInventory);
-            //_jobsRemoteDataModel.SeedCraftingJobs(loginData.CraftingJobs);
-            //_jobsRemoteDataModel.SeedJobSlots(loginData.CraftingSlots);
-
-            //// TODO: MS: Discuss with Chase where to do this. In a Loading Scene, I think.
-            //_getMyTeamsSignal.Fire(new GetMyTeamsSignalParams() { TeamType = TeamType.City });
-
-            //_startupDataModel.LoadingProgress.Value = StartupDataModel.ELoadingProgress.MoveToGamePlay;
-
-            //// now that we have both remote & static data loaded & ready,
-            //// we need to link up all the player owned modules with their module type datas
-            //for (int i = 0; i < loginData.PlayerOwnedModules.Count; i++)
-            //{
-            //    ModuleData moduleData = loginData.PlayerOwnedModules [i];
-
-            //    // @todo - chase - make sure this is set before you commit asset bundles.
-            //    moduleData.ModuleTypeData = _staticDataModel.GetModuleByName (moduleData.Name);
-            //}
-
-            //// also link up all the workers with their worker types
-            //for (int i = 0; i < loginData.PlayerOwnedWorkers.Count; i++) {
-            //    WorkerData workerData = loginData.PlayerOwnedWorkers [i];
-            //    workerData.WorkerTypeData = _staticDataModel.GetWorkerTypeByName (workerData.Name);
-            //}
-
-            //// Linking up all the Heros with their HeroTypes.
-            //for (int i = 0; i < loginData.PlayerOwnerHeroes.Count; i++)
-            //{
-            //    HeroData heroData = loginData.PlayerOwnerHeroes[i];
-            //    heroData.HeroTypeData = _staticDataModel.GetHeroTypeByName(heroData.Name);
-            //}
-            
-            //_staticDataModel.BackgroundLayout.Value = loginData.Background;
         }
 
         private void OnReload()
