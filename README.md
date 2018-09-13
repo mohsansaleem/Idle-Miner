@@ -1,6 +1,6 @@
 # Idle Miner
 
-This is a simulation game with the raw UI. Primary purpose of this project was implement an expandable code architecture. 
+This is a simulation game with the raw UI. Primary purpose of this project was to implement an expandable code architecture. 
 
 ##### Highlights:
   - Unity 2018.2.0f2
