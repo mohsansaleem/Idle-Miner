@@ -26,6 +26,19 @@ This is a simulation game with the raw UI. Primary purpose of this project was t
   - Check /MainMenu/Potato-Games/Always Start from Startup Scene.
   - Press Play.
 
+#### Hierarchy Overview:
+  - All the scenes code is in __\Assets\Scripts\pg\im\view__. Each scene has the respective folders including some extra scenes like Popup and Hud etc.
+  - __GamePlay__ scene has all the __magic__.
+  - __Bootstrap__ is the starting scene.
+  - __*Data__ files\classes are for __Metadata__ objects.
+  - __*RemoteData__ files/classes are for __GameState__ objects and I am linking the *Data on loading of GameState.
+  - __*RemoteDataModel__ are the Models that contain __RemoteData__ and other reactive properties and collections.
+  - __\Assets\Scripts\pg\core__ is __submodule__ that contains just the abstract of some generics that can be shared across the project so I have added it to minimise my work.
+  - All the __scenes__ and __respective resources__ are in __\Assets\Resources__
+  - Main __Game code__ is in __\Assets\Scripts\pg\im\.
+  - (__Models__, __RemoteData__ and __Data__)__s__ are in __\Assets\Scripts\pg\im\model__.
+  - All the __Commands__ are in   __\Assets\Scripts\pg\im\command__.
+
 #### Information:
 Delete the /Assets/StreamingAssets/GameState.json if you want to run the default gamestate again.
 Meta is not balanced. So you will have to manage.
