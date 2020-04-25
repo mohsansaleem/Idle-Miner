@@ -370,32 +370,32 @@
     },
     {
       "MovementSpeed": 1,
-      "LoadingSpeed": 300,
+      "LoadingSpeed": 700,
       "Load": 800,
       "UpgradeCost": 10000
     },
     {
       "MovementSpeed": 2,
-      "LoadingSpeed": 600,
+      "LoadingSpeed": 1600,
       "Load": 2000,
       "UpgradeCost": 20000
     },
     {
       "MovementSpeed": 2,
-      "LoadingSpeed": 1500,
+      "LoadingSpeed": 2500,
       "Load": 15000,
       "UpgradeCost": 50000
     },
     {
       "MovementSpeed": 2,
-      "LoadingSpeed": 1600,
+      "LoadingSpeed": 3600,
       "Load": 24000,
       "UpgradeCost": 100000
     },
     {
       "MovementSpeed": 2,
       "LoadingSpeed": 1700,
-      "Load": 25000,
+      "Load": 75000,
       "UpgradeCost": 200000
     }
   ],

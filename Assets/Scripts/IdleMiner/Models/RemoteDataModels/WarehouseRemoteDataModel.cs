@@ -2,6 +2,7 @@
 using PG.IdleMiner.Misc;
 using PG.IdleMiner.Models.DataModels;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace PG.IdleMiner.Models.RemoteDataModels
@@ -43,9 +44,18 @@ namespace PG.IdleMiner.Models.RemoteDataModels
             }
 
             // TODO: Move this to respective Facade.
-            Observable.Timer(TimeSpan.FromSeconds(Constants.FacadesTickTime)).Repeat().Subscribe((interval) => Tick()).AddTo(_disposables);
+            Observable.Timer(TimeSpan.FromMilliseconds(Constants.FacadesTickTime)).Repeat().Subscribe((interval) => Tick()).AddTo(_disposables);
         }
 
+        public void Upgrade()
+        {
+            if (WarehouseRemoteData.WarehouseLevel < _staticDataModel.MetaData.Warehouse.Count)
+            {
+                WarehouseRemoteData.WarehouseLevel++;
+                WarehouseRemoteData.WarehouseLevelData = _staticDataModel.GetWarehouseLevelData(WarehouseRemoteData.WarehouseLevel);
+            }
+        }
+        
         public void AddCash(double cash)
         {
             _remoteDataModel.UpdateCash(_remoteDataModel.Cash.Value + cash);
@@ -55,6 +65,11 @@ namespace PG.IdleMiner.Models.RemoteDataModels
         {
             if (!(WarehouseRemoteData == null || WarehouseRemoteData.WarehouseLevelData == null))
             {
+                while (WarehouseRemoteData.Transporters.Count < WarehouseRemoteData.WarehouseLevelData.Transporters)
+                {
+                    WarehouseRemoteData.Transporters.Add(new TransporterRemoteData());
+                }
+                
                 foreach (TransporterRemoteData transporter in WarehouseRemoteData.Transporters)
                 {
                     TransporterTick(transporter);
@@ -66,8 +81,18 @@ namespace PG.IdleMiner.Models.RemoteDataModels
 
         // TODO: Not the best place to do this. Add respective Facades and then do this there. 
         // For now doing it here.
+        float _previousStamp = float.MinValue;
         private void TransporterTick(TransporterRemoteData transporter)
         {
+            if (Math.Abs(_previousStamp - float.MinValue) < 0.0001f)
+            {
+                _previousStamp = Time.time;
+                return;
+            }
+
+            float interval = (Time.time - _previousStamp);
+            _previousStamp = Time.time;
+            
             switch (transporter.TransporterState)
             {
                 case ETransporterState.Idle:
@@ -77,13 +102,13 @@ namespace PG.IdleMiner.Models.RemoteDataModels
                     }
                     break;
                 case ETransporterState.WalkingToElevator:
-                    if ((transporter.CurrentLocation += (int)WarehouseRemoteData.WarehouseLevelData.WalkSpeed) >= _staticDataModel.MetaData.WarehouseDistance)
+                    if ((transporter.CurrentLocation += WarehouseRemoteData.WarehouseLevelData.WalkSpeed * interval) >= _staticDataModel.MetaData.WarehouseDistance)
                     {
                         transporter.TransporterState = ETransporterState.Loading;
                     }
                     break;
                 case ETransporterState.WalkingToWarehouse:
-                    if ((transporter.CurrentLocation -= (int)WarehouseRemoteData.WarehouseLevelData.WalkSpeed) <= 0)
+                    if ((transporter.CurrentLocation -= (int)WarehouseRemoteData.WarehouseLevelData.WalkSpeed * interval) <= 0)
                     {
                         AddCash(transporter.LoadedCash);
                         transporter.LoadedCash = 0;
@@ -91,14 +116,14 @@ namespace PG.IdleMiner.Models.RemoteDataModels
                     }
                     break;
                 case ETransporterState.Loading:
-                    double cashToLoad = WarehouseRemoteData.WarehouseLevelData.LoadingSpeed;
+                    double cashToLoad = WarehouseRemoteData.WarehouseLevelData.LoadingSpeed * interval;
                     if (transporter.LoadedCash + cashToLoad > WarehouseRemoteData.WarehouseLevelData.LoadPerTransporter)
                         cashToLoad = WarehouseRemoteData.WarehouseLevelData.LoadPerTransporter - transporter.LoadedCash;
                     double cashLoaded = _remoteDataModel.Elevator.RemoveStoredCash(cashToLoad);
 
                     transporter.LoadedCash += cashLoaded;
 
-                    if (cashToLoad != cashLoaded || transporter.LoadedCash == WarehouseRemoteData.WarehouseLevelData.LoadPerTransporter)
+                    if (Math.Abs(cashToLoad - cashLoaded) > 0.1f || transporter.LoadedCash >= WarehouseRemoteData.WarehouseLevelData.LoadPerTransporter)
                         transporter.TransporterState = ETransporterState.WalkingToWarehouse;
                     break;
             }

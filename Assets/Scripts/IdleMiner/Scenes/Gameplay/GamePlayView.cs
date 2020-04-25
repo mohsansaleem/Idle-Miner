@@ -26,33 +26,67 @@ namespace PG.IdleMiner.Scenes.Gameplay
 
         private Dictionary<string, ShaftView> _shafts = new Dictionary<string, ShaftView>();
 
+        public ShaftView AddShaft(ShaftRemoteData shaftRemoteData)
+        {
+            ShaftView shaftView;
+            if (_shafts.ContainsKey(shaftRemoteData.ShaftId))
+            {
+                shaftView = _shafts[shaftRemoteData.ShaftId];
+                shaftView.SetShaftRemoteData(shaftRemoteData);
+            }
+            else
+            {
+                shaftView = Instantiate(ShaftViewPrefab, _shaftsContainer);
+                _shafts[shaftRemoteData.ShaftId] = shaftView;
+                shaftView.SetShaftRemoteData(shaftRemoteData);
+            }
+
+            return shaftView;
+        }
+        
         public void UpdateShaft(ShaftRemoteData shaftRemoteData)
         {
             if (_shafts.ContainsKey(shaftRemoteData.ShaftId))
             {
-                _shafts[shaftRemoteData.ShaftId].ShaftRemoteData = shaftRemoteData;
+                var shaft = _shafts[shaftRemoteData.ShaftId];
+                shaft.SetShaftRemoteData(shaftRemoteData);
             }
             else
             {
-                _shafts[shaftRemoteData.ShaftId] = Instantiate(ShaftViewPrefab, _shaftsContainer);
-                _shafts[shaftRemoteData.ShaftId].ShaftRemoteData = shaftRemoteData;
+                Debug.LogError("Shaft missing.");
             }
         }
 
+        public void SubscribeUpgradeWareHouse(Action action)
+        {
+            _warehouseView.OnWarehouseUpgradeClick += action;
+        }
+        
+        public void SubscribeUpgradeElevator(Action action)
+        {
+            _elevatorView.OnElevatorUpgradeClick += action;
+        }
+        
         public void UpdateWarehouse(WarehouseRemoteData warehouseRemoteData)
         {
             _warehouseView.WarehouseRemoteData = warehouseRemoteData;
         }
 
+        public void UnSubscribeUpgradeWareHouse(Action action)
+        {
+            _warehouseView.OnWarehouseUpgradeClick -= action;
+        }
+        
+        public void UnSubscribeElevatorHouse(Action action)
+        {
+            _elevatorView.OnElevatorUpgradeClick -= action;
+        }
+        
         public void UpdateElevator(ElevatorRemoteData elevatorRemoteData, int height)
         {
             _elevatorView.ElevatorHeight = height;
             _elevatorView.SetElevatorRemoteData(elevatorRemoteData);
         }
-
-
-        public Action OnElevatorUpgradeButtonClicked;
-        public Action OnWareHouseUpgradeButtonClicked;
 
         public void Show()
         {

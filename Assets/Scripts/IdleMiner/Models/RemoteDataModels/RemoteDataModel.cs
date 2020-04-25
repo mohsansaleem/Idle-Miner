@@ -1,4 +1,5 @@
-﻿using PG.IdleMiner.Models.DataModels;
+﻿using System.Linq;
+using PG.IdleMiner.Models.DataModels;
 using UniRx;
 using Zenject;
 
@@ -59,6 +60,11 @@ namespace PG.IdleMiner.Models.RemoteDataModels
             shaft.SeedShaftRemoteData(shaftRemoteData);
 
             Shafts.Add(shaft);
+        }
+
+        public ShaftRemoteDataModel GetShaftRemoteDataModel(string shaftId)
+        {
+            return Shafts.First(shaft => shaft.ShaftRemoteData.ShaftId.Equals(shaftId));
         }
 
         public void UpdateCash(double cash)

@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ModestTree;
+//using ModestTree;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Zenject.Internal;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -225,7 +225,7 @@ namespace Zenject
                     continue;
                 }
 
-                var componentType = component.GetType();
+                System.Type componentType = component.GetType();
 
                 switch (bindType)
                 {
@@ -246,7 +246,7 @@ namespace Zenject
                     }
                     case ZenjectBinding.BindTypes.AllInterfacesAndSelf:
                     {
-                        Container.Bind(componentType.Interfaces().Append(componentType).ToArray()).WithId(identifier).FromInstance(component);
+                        Container.Bind(LinqExtensions.Append(componentType.Interfaces(), componentType).ToArray()).WithId(identifier).FromInstance(component);
                         break;
                     }
                     default:

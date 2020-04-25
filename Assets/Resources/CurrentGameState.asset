@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c47822d366645418c578a193fb9d8a8, type: 3}
+  m_Name: CurrentGameState
+  m_EditorClassIdentifier: 
+  User:
+    UserShafts:
+    - ShaftId: S1
+      ShaftLevel: 1
+      Manager: MM1
+      BinCash: 0
+      Miners:
+      - MinedCash: 0
+        CurrentLocation: 0
+        MinerState: 20
+    Elevator:
+      ElevatorLevel: 1
+      StoredCash: 0
+      LoadedCash: 0
+      CurrentLocation: 0
+      Manager: EM1
+      ElevatorState: 10
+    Warehouse:
+      WarehouseLevel: 1
+      Manager: WHM1
+      Transporters:
+      - LoadedCash: 0
+        CurrentLocation: 0
+        TransporterState: 10
+    Managers:
+      MinningManagers:
+      - ManagerId: MM1
+      ElevatorManagers:
+      - ManagerId: EM1
+      WareHouseManagers:
+      - ManagerId: WHM1
+    IdleCash: 0
+    Cash: 0
+    SuperCash: 0

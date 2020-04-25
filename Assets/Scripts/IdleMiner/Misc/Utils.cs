@@ -6,6 +6,8 @@ namespace PG.IdleMiner.Misc
     {
         public static string ToShort (this double num)
         {
+            num = (long)num;
+            
             if (num > 999999999999999999999999.0)
             {
                 return num.ToString("0,,,,,,,.##ad", CultureInfo.InvariantCulture);

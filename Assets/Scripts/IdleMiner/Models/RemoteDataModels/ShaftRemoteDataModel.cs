@@ -2,6 +2,7 @@
 using PG.IdleMiner.Misc;
 using PG.IdleMiner.Models.DataModels;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace PG.IdleMiner.Models.RemoteDataModels
@@ -43,7 +44,16 @@ namespace PG.IdleMiner.Models.RemoteDataModels
             }
 
             // TODO: Move this to respective Facade.
-            Observable.Timer(TimeSpan.FromSeconds(Constants.FacadesTickTime)).Repeat().Subscribe((interval) => Tick()).AddTo(_disposables);
+            Observable.Timer(TimeSpan.FromMilliseconds(Constants.FacadesTickTime)).Repeat().Subscribe((interval) => Tick()).AddTo(_disposables);
+        }
+
+        public void Upgrade()
+        {
+            if (ShaftRemoteData.ShaftLevel < _staticDataModel.MetaData.Shafts[ShaftRemoteData.ShaftId].Count)
+            {
+                ShaftRemoteData.ShaftLevel++;
+                ShaftRemoteData.ShaftLevelData = _staticDataModel.GetShaftLevelData(ShaftRemoteData.ShaftId, ShaftRemoteData.ShaftLevel);
+            }
         }
 
         public void SetBinCash(double cash)
@@ -65,20 +75,35 @@ namespace PG.IdleMiner.Models.RemoteDataModels
 
         // TODO: Not the best place to do this. Add respective Facades and then do this there. 
         // For now doing it here.
+        float _previousStamp = float.MinValue;
         private void Tick()
         {
+            if (Math.Abs(_previousStamp - float.MinValue) < 0.0001f)
+            {
+                _previousStamp = Time.time;
+                return;
+            }
+
+            float interval = (Time.time - _previousStamp);
+            _previousStamp = Time.time;
+            
             if (!(ShaftRemoteData == null || ShaftRemoteData.ShaftLevelData == null))
             {
+                while (ShaftRemoteData.Miners.Count < ShaftRemoteData.ShaftLevelData.Miners)
+                {
+                    ShaftRemoteData.Miners.Add(new MinerRemoteData());
+                }
+                
                 foreach (MinerRemoteData miner in ShaftRemoteData.Miners)
                 {
-                    MinerTick(miner);
+                    MinerTick(miner, interval);
                 }
 
                 ReactiveShaft.SetValueAndForceNotify(ShaftRemoteData);
             }
         }
 
-        private void MinerTick(MinerRemoteData miner)
+        private void MinerTick(MinerRemoteData miner, float interval)
         {
             switch (miner.MinerState)
             {
@@ -89,13 +114,13 @@ namespace PG.IdleMiner.Models.RemoteDataModels
                     }
                     break;
                 case EMinerState.WalkingToMine:
-                    if ((miner.CurrentLocation += ShaftRemoteData.ShaftLevelData.WalkSpeed) >= _staticDataModel.MetaData.MineLength)
+                    if ((miner.CurrentLocation += ShaftRemoteData.ShaftLevelData.WalkSpeed * interval) >= _staticDataModel.MetaData.MineLength)
                     { 
                         miner.MinerState = EMinerState.Mining;
                     }
                     break;
                 case EMinerState.WalkingToBin:
-                    if ((miner.CurrentLocation -= ShaftRemoteData.ShaftLevelData.WalkSpeed) <= 0)
+                    if ((miner.CurrentLocation -= ShaftRemoteData.ShaftLevelData.WalkSpeed * interval) <= 0)
                     {
                         SetBinCash(ShaftRemoteData.BinCash + miner.MinedCash);
                         miner.MinedCash = 0;
@@ -103,7 +128,7 @@ namespace PG.IdleMiner.Models.RemoteDataModels
                     }
                     break;
                 case EMinerState.Mining:
-                    miner.MinedCash += ShaftRemoteData.ShaftLevelData.MinningSpeed;
+                    miner.MinedCash += ShaftRemoteData.ShaftLevelData.MinningSpeed * interval;
                     if(miner.MinedCash >= ShaftRemoteData.ShaftLevelData.WorkerCapacity)
                     {
                         miner.MinedCash = ShaftRemoteData.ShaftLevelData.WorkerCapacity;

@@ -13,21 +13,29 @@ MonoBehaviour:
   m_Name: Default GameState
   m_EditorClassIdentifier: 
   User:
-    UserShafts: []
+    UserShafts:
+    - ShaftId: S1
+      ShaftLevel: 1
+      Manager: MM1
+      BinCash: 0
+      Miners:
+      - MinedCash: 30
+        CurrentLocation: 8
+        MinerState: 5
     Elevator:
-      ElevatorLevel: 0
+      ElevatorLevel: 1
       StoredCash: 0
-      LoadedCash: 0
-      CurrentLocation: 0
-      Manager: 
-      ElevatorState: 0
+      LoadedCash: 50
+      CurrentLocation: 0.26412886
+      Manager: EM1
+      ElevatorState: 20
     Warehouse:
-      WarehouseLevel: 0
-      Manager: WM
+      WarehouseLevel: 1
+      Manager: WM1
       Transporters:
       - LoadedCash: 0
-        CurrentLocation: 0
-        TransporterState: 0
+        CurrentLocation: 4
+        TransporterState: 10
     Managers:
       MinningManagers:
       - ManagerId: MM1
@@ -36,5 +44,5 @@ MonoBehaviour:
       WareHouseManagers:
       - ManagerId: WHM1
     IdleCash: 1000
-    Cash: 2000
+    Cash: 2150
     SuperCash: 5000

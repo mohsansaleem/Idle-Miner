@@ -1903,8 +1903,8 @@ namespace Zenject
 
         public FromBinderNonGeneric BindInterfacesAndSelfTo(Type type)
         {
-            var bindInfo = new BindInfo(
-                type.Interfaces().Append(type).ToList(), "BindInterfacesAndSelfTo({0})".Fmt(type));
+            var bindInfo = new BindInfo(LinqExtensions.Append(type.Interfaces(), type).ToList(),
+                "BindInterfacesAndSelfTo({0})".Fmt(type));
 
             // Almost always, you don't want to use the default AsTransient so make them type it
             bindInfo.RequireExplicitScope = true;

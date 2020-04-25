@@ -18,7 +18,7 @@ namespace PG.IdleMiner.Models.DataModels
         public double MinedCash;
 
         [JsonProperty("CurrentLocation")]
-        public int CurrentLocation;
+        public float CurrentLocation;
 
         [JsonProperty("MinerState")]
         public EMinerState MinerState;

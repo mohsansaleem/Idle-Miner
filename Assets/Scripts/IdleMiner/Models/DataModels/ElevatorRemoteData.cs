@@ -24,7 +24,7 @@ namespace PG.IdleMiner.Models.DataModels
         public double LoadedCash;
 
         [JsonProperty("CurrentLocation")]
-        public int CurrentLocation;
+        public float CurrentLocation;
 
         [JsonProperty("Manager")]
         public string Manager;

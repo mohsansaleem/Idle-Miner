@@ -2,6 +2,7 @@
 using PG.IdleMiner.Misc;
 using PG.IdleMiner.Models.DataModels;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace PG.IdleMiner.Models.RemoteDataModels
@@ -45,9 +46,17 @@ namespace PG.IdleMiner.Models.RemoteDataModels
             }
 
             // TODO: Move this to respective Facade.
-            Observable.Timer(TimeSpan.FromSeconds(Constants.FacadesTickTime)).Repeat().Subscribe((interval) => Tick()).AddTo(_disposables);
+            Observable.Timer(TimeSpan.FromMilliseconds(Constants.FacadesTickTime)).Repeat().Subscribe((interval) => Tick()).AddTo(_disposables);
         }
 
+        public void Upgrade()
+        {
+            if (ElevatorRemoteData.ElevatorLevel < _staticDataModel.MetaData.Elevator.Count)
+            {
+                ElevatorRemoteData.ElevatorLevel++;
+                ElevatorRemoteData.ElevatorLevelData = _staticDataModel.GetElevatorLevelData(ElevatorRemoteData.ElevatorLevel);
+            }
+        }
 
         public void SetLoadedCash(double cash)
         {
@@ -81,8 +90,18 @@ namespace PG.IdleMiner.Models.RemoteDataModels
 
         // TODO: Not the best place to do this. Add respective Facades and then do this there. 
         // For now doing it here.
+        float _previousStamp = float.MinValue;
         private void Tick()
         {
+            if (Math.Abs(_previousStamp - float.MinValue) < 0.0001f)
+            {
+                _previousStamp = Time.time;
+                return;
+            }
+
+            float interval = (Time.time - _previousStamp);
+            _previousStamp = Time.time;
+
             if (!(ElevatorRemoteData == null || ElevatorRemoteData.ElevatorLevelData == null))
             {
                 int shaftNumber = 1;
@@ -98,19 +117,22 @@ namespace PG.IdleMiner.Models.RemoteDataModels
                         }
                         break;
                     case EElevatorState.MovingDown:
-
-                        if (ElevatorRemoteData.CurrentLocation + ElevatorRemoteData.ElevatorLevelData.MovementSpeed > MaxDistance)
+                        if ((ElevatorRemoteData.CurrentLocation + (ElevatorRemoteData.ElevatorLevelData.MovementSpeed * interval)) > MaxDistance)
                         {
                             ElevatorRemoteData.CurrentLocation = MaxDistance;
                         }
                         else
                         {
-                            ElevatorRemoteData.CurrentLocation += ElevatorRemoteData.ElevatorLevelData.MovementSpeed;
+                            ElevatorRemoteData.CurrentLocation += (ElevatorRemoteData.ElevatorLevelData.MovementSpeed * interval);
                         }
 
-                        if (ElevatorRemoteData.CurrentLocation % _staticDataModel.MetaData.ShaftDepth == 0)
+                        if (ElevatorRemoteData.CurrentLocation % _staticDataModel.MetaData.ShaftDepth <= 0.1f && 
+                            ElevatorRemoteData.CurrentLocation >= _staticDataModel.MetaData.ShaftDepth)
                         {
-                            shaftNumber = ElevatorRemoteData.CurrentLocation / _staticDataModel.MetaData.ShaftDepth;
+                            shaftNumber = (int)(ElevatorRemoteData.CurrentLocation / _staticDataModel.MetaData.ShaftDepth);
+
+                            if (shaftNumber < 1)
+                                shaftNumber = 1;
 
                             shaft = _remoteDataModel.Shafts[shaftNumber - 1];
 
@@ -123,7 +145,7 @@ namespace PG.IdleMiner.Models.RemoteDataModels
                         }
                         break;
                     case EElevatorState.MovingUp:
-                        if ((ElevatorRemoteData.CurrentLocation -= ElevatorRemoteData.ElevatorLevelData.MovementSpeed) <= 0)
+                        if ((ElevatorRemoteData.CurrentLocation -= ElevatorRemoteData.ElevatorLevelData.MovementSpeed * interval) <= 0)
                         {
                             SetStoredCash(ElevatorRemoteData.StoredCash + ElevatorRemoteData.LoadedCash);
                             ElevatorRemoteData.LoadedCash = 0;
@@ -132,11 +154,14 @@ namespace PG.IdleMiner.Models.RemoteDataModels
                         break;
                     case EElevatorState.Loading:
 
-                        shaftNumber = ElevatorRemoteData.CurrentLocation / _staticDataModel.MetaData.ShaftDepth;
+                        shaftNumber = (int)(ElevatorRemoteData.CurrentLocation / _staticDataModel.MetaData.ShaftDepth);
 
-                        shaft = _remoteDataModel.Shafts[shaftNumber - 1];
+                        if (shaftNumber < 1)
+                            shaftNumber = 1;
+                        
+                        shaft = _remoteDataModel.Shafts[(shaftNumber  - 1) % _remoteDataModel.Shafts.Count];
 
-                        double cashToLoad = ElevatorRemoteData.ElevatorLevelData.LoadingSpeed;
+                        double cashToLoad = ElevatorRemoteData.ElevatorLevelData.LoadingSpeed * interval;
                         if (ElevatorRemoteData.LoadedCash + cashToLoad > ElevatorRemoteData.ElevatorLevelData.LoadCapacity)
                             cashToLoad = ElevatorRemoteData.ElevatorLevelData.LoadCapacity - ElevatorRemoteData.LoadedCash;
                         double cashLoaded = shaft.RemoveBinCash(cashToLoad);
@@ -149,7 +174,7 @@ namespace PG.IdleMiner.Models.RemoteDataModels
                             ElevatorRemoteData.ElevatorState = ElevatorRemoteData.CurrentLocation >= MaxDistance ? EElevatorState.MovingUp : EElevatorState.MovingDown;
                         }
 
-                        if (ElevatorRemoteData.LoadedCash == ElevatorRemoteData.ElevatorLevelData.LoadCapacity)
+                        if (Math.Abs(ElevatorRemoteData.LoadedCash - ElevatorRemoteData.ElevatorLevelData.LoadCapacity) < 0.1f)
                         {
                             ElevatorRemoteData.ElevatorState = EElevatorState.MovingUp;
                         }

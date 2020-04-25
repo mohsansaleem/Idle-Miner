@@ -2,33 +2,56 @@
   "Shafts": [
     {
       "Id": "S1",
-      "Level": 1,
+      "Level": 7,
+      "Manager": "MM1",
+      "BinCash": 0.0,
+      "Miners": [
+        {
+          "MinedCash": 0.0,
+          "CurrentLocation": 7.967926,
+          "MinerState": 10
+        },
+        {
+          "MinedCash": 110.0,
+          "CurrentLocation": 1.64564133,
+          "MinerState": 20
+        }
+      ]
+    },
+    {
+      "Id": "S2",
+      "Level": 5,
       "Manager": "M1",
       "BinCash": 0.0,
       "Miners": [
         {
-          "MinedCash": 20.0,
-          "CurrentLocation": 8,
-          "MinerState": 5
+          "MinedCash": 0.0,
+          "CurrentLocation": 5.929903,
+          "MinerState": 10
+        },
+        {
+          "MinedCash": 900.0,
+          "CurrentLocation": 4.342537,
+          "MinerState": 20
         }
       ]
     }
   ],
   "Elevator": {
-    "ElevatorLevel": 1,
-    "StoredCash": 50.0,
-    "LoadedCash": 50.0,
-    "CurrentLocation": 2,
-    "Manager": "E1",
+    "ElevatorLevel": 4,
+    "StoredCash": 14810.304412841797,
+    "LoadedCash": 2020.0,
+    "CurrentLocation": 5.68182373,
+    "Manager": "EM1",
     "ElevatorState": 20
   },
   "Warehouse": {
-    "Level": 1,
-    "Manager": "W1",
+    "Level": 2,
+    "Manager": "WHM1",
     "Transporters": [
       {
-        "LoadedCash": 0.0,
-        "CurrentLocation": 10,
+        "LoadedCash": 1149.6955871582031,
+        "CurrentLocation": 10.0569668,
         "TransporterState": 5
       }
     ]
@@ -36,25 +59,25 @@
   "ManagersUnlocked": {
     "MinningManagers": [
       {
-        "Id": "S1",
+        "Id": "MM1",
         "PurchaseTime": "0001-01-01T00:00:00"
       }
     ],
     "ElevatorManagers": [
       {
-        "Id": "E1",
+        "Id": "EM1",
         "PurchaseTime": "0001-01-01T00:00:00"
       }
     ],
     "WareHouseManagers": [
       {
-        "Id": "W1",
+        "Id": "WHM1",
         "PurchaseTime": "0001-01-01T00:00:00"
       }
     ]
   },
-  "IdleCash": 1200.0,
-  "Cash": 2300.0,
-  "SuperCash": 1000.0,
-  "LastSaved": "2020-04-25T06:34:52.4417+05:00"
+  "IdleCash": 0.0,
+  "Cash": 14200.0,
+  "SuperCash": 0.0,
+  "LastSaved": "2020-04-25T15:43:11.858712+05:00"
 }

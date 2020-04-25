@@ -26,6 +26,21 @@ namespace PG.IdleMiner.Scenes.Gameplay
 
         public Action OnWarehouseUpgradeClick;
 
+        private void OnEnable()
+        {
+            _upgradeButton.onClick.AddListener(OnWarehouseUpgradeClicked);
+        }
+
+        private void OnDisable()
+        {
+            _upgradeButton.onClick.RemoveListener(OnWarehouseUpgradeClicked);
+        }
+
+        private void OnWarehouseUpgradeClicked()
+        {
+            OnWarehouseUpgradeClick?.Invoke();
+        }
+
         public WarehouseRemoteData WarehouseRemoteData
         {
             set

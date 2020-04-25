@@ -27,17 +27,17 @@ This is a simulation game with the raw UI. Primary purpose of this project was t
   - Press Play.
 
 #### Hierarchy Overview:
-  - All the scenes code is in __\Assets\Scripts\pg\im\view__. Each scene has the respective folders including some extra scenes like Popup and Hud etc.
+  - All the scenes code is in __\Assets\Scripts\IdleMiner\Scenes__. Each scene has the respective folders including some extra scenes like Popup and Hud etc.
   - __GamePlay__ scene has all the __magic__.
   - __Bootstrap__ is the starting scene.
   - __*Data__ files\classes are for __Metadata__ objects.
   - __*RemoteData__ files/classes are for __GameState__ objects and I am linking the *Data on loading of GameState.
   - __*RemoteDataModel__ are the Models that contain __RemoteData__ and other reactive properties and collections.
-  - __\Assets\Scripts\pg\core__ is __submodule__ that contains just the abstract of some generics that can be shared across the project so I have added it to minimise my work.
-  - All the __scenes__ and __respective resources__ are in __\Assets\Resources__
-  - Main __Game code__ is in __\Assets\Scripts\pg\im\.
-  - (__Models__, __RemoteData__ and __Data__)__s__ are in __\Assets\Scripts\pg\im\model__.
-  - All the __Commands__ are in   __\Assets\Scripts\pg\im\command__.
+  - __\Assets\Scripts\Core__ is __submodule__ that contains just the abstract of some generics that can be shared across the project so I have added it to minimise my work.
+  - All the __Scenes__ and __respective resources__ are in __\Assets\Resources__
+  - Main __Game code__ is in __\Assets\Scripts\IdleMiner\.
+  - (__Models__, __RemoteData__ and __Data__)__s__ are in __\Assets\Scripts\IdleMiner\Models__.
+  - All the __Commands__ are in   __\Assets\Scripts\IdleMiner\Commands__.
 
 #### Information:
 Delete the /Assets/StreamingAssets/GameState.json if you want to run the default gamestate again.

@@ -1,4 +1,7 @@
 ﻿using System;
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using PG.IdleMiner.Misc;
 using PG.IdleMiner.Models.DataModels;
 using TMPro;
@@ -26,23 +29,42 @@ namespace PG.IdleMiner.Scenes.Gameplay
 
         public int ElevatorHeight;
 
+        // Locals
+        private Vector2 _targetPosition;
+
+        private void OnEnable()
+        {
+            _upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
+        }
+
+        private void OnDisable()
+        {
+            _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
+        }
+
+        private void OnUpgradeButtonClicked()
+        {
+            OnElevatorUpgradeClick?.Invoke();
+        }
+
         public void SetElevatorRemoteData(ElevatorRemoteData elevatorRemoteData)
         {
             _elevatorRemoteData = elevatorRemoteData;
 
             SetElevatorPosition(_liftDriver, _elevatorRemoteData.CurrentLocation);
             _liftDriver.LoadStuff(_elevatorRemoteData.LoadedCash, _elevatorRemoteData.ElevatorLevelData.LoadCapacity);
-            _storedCount.text = _elevatorRemoteData.StoredCash.ToShort();
+            _storedCount.text = (_elevatorRemoteData.StoredCash.ToShort()).ToString();
 
             _currentLevelText.text = _elevatorRemoteData.ElevatorLevel.ToString();
         }
 
-        private void SetElevatorPosition(CarrierView carrierView, int location)
+        private void SetElevatorPosition(CarrierView carrierView, float location)
         {
             float height = _path.rect.height - carrierView.RectTransform.rect.height;
             float unitDistance = height / ElevatorHeight;
+            var targetPos = new Vector2(0f, height - location * unitDistance + carrierView.RectTransform.rect.height);
 
-            carrierView.RectTransform.anchoredPosition = new Vector2(0f, height - location * unitDistance + carrierView.RectTransform.rect.height);
+            carrierView.RectTransform.anchoredPosition = targetPos;
         }
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace PG.editor
+namespace PG.Editor
 {
     public static class PGEditorMenu
     {

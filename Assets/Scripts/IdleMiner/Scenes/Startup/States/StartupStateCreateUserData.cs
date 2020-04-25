@@ -28,9 +28,10 @@ namespace PG.IdleMiner.Scenes.Startup
                 Promise promise = new Promise();
 
                 promise.Then(
-                    () => {
-                        _remoteDataModel.SeedUserData(userData);
-                        StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.DataSeeded;
+                    () =>
+                    {
+                        _remoteDataModel.UserData = userData;
+                        StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.StaticDataLoaded;
                     }
                 ).Catch(e =>
                 {

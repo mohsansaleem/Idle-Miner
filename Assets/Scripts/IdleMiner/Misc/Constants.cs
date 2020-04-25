@@ -12,6 +12,6 @@ namespace PG.IdleMiner.Misc
         public const int WarehouseDistance = 10;
         public const int ShaftDistance = 4;
         
-        public const float FacadesTickTime = 1f;
+        public const float FacadesTickTime = 33f;
     }
 }
