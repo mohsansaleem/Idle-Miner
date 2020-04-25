@@ -1,3 +1,0 @@
-﻿namespace pg.im.installer
-{
-}

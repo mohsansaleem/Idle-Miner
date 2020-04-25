@@ -1,0 +1,3 @@
+﻿namespace PG.IdleMiner.Installers
+{
+}

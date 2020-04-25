@@ -1,0 +1,4 @@
+﻿namespace PG.IdleMiner.installer
+{
+
+}

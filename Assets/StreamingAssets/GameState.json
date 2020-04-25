@@ -7,7 +7,7 @@
       "BinCash": 0.0,
       "Miners": [
         {
-          "MinedCash": 30.0,
+          "MinedCash": 20.0,
           "CurrentLocation": 8,
           "MinerState": 5
         }
@@ -18,7 +18,7 @@
     "ElevatorLevel": 1,
     "StoredCash": 50.0,
     "LoadedCash": 50.0,
-    "CurrentLocation": 1,
+    "CurrentLocation": 2,
     "Manager": "E1",
     "ElevatorState": 20
   },
@@ -28,8 +28,8 @@
     "Transporters": [
       {
         "LoadedCash": 0.0,
-        "CurrentLocation": 8,
-        "TransporterState": 10
+        "CurrentLocation": 10,
+        "TransporterState": 5
       }
     ]
   },
@@ -54,7 +54,7 @@
     ]
   },
   "IdleCash": 1200.0,
-  "Cash": 2200.0,
+  "Cash": 2300.0,
   "SuperCash": 1000.0,
-  "LastSaved": "2018-09-12T23:08:13.9281451+05:00"
+  "LastSaved": "2020-04-25T06:34:52.4417+05:00"
 }

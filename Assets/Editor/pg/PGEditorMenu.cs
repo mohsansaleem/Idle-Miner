@@ -1,10 +1,8 @@
-﻿using System.Linq;
+﻿using PG.IdleMiner.Scenes.Startup;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.SceneManagement;
-using pg.im.view;
 
-namespace pg.editor
+namespace PG.editor
 {
     public static class PGEditorMenu
     {
