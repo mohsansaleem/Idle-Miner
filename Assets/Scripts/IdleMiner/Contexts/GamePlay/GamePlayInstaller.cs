@@ -16,7 +16,8 @@ namespace PG.IdleMiner.Contexts.GamePlay
             Container.Bind<GamePlayModel>().AsSingle();
 
             Container.DeclareSignal<AddShaftSignal>();
-            Container.BindSignal<AddShaftSignal>().To<AddShaftCommand>((x) => x.Execute()).AsSingle();
+            Container.BindSignal<AddShaftSignal>().ToMethod<AddShaftCommand>((x) => x.Execute)
+                .FromNew();
 
             Container.BindInstance(GamePlayView);
             Container.BindInterfacesTo<GamePlayMediator>().AsSingle();

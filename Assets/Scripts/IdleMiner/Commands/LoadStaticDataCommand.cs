@@ -2,6 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 using PG.Core.Commands;
+using PG.IdleMiner.Contexts.Startup;
 using PG.IdleMiner.Misc;
 using PG.IdleMiner.Models;
 using PG.IdleMiner.Models.DataModels;
@@ -15,7 +16,7 @@ namespace PG.IdleMiner.Commands
     {
         [Inject] private readonly StaticDataModel _staticDataModel;
 
-        public void Execute(Promise onCompletePromise)
+        public void Execute(LoadStaticDataSignal signal)
         {
             var sequence = Promise.Sequence(
                 () => LoadMetaJson(Constants.MetaDataFile)
@@ -26,14 +27,14 @@ namespace PG.IdleMiner.Commands
                 .Then(() =>
                     {
                         Debug.Log(string.Format("{0} , static data load completed!", this));
-                        onCompletePromise.Resolve();
+                        signal.Promise.Resolve();
                     }
                 )
                 .Catch(e =>
                     {
                         Debug.LogError(string.Format("{0} : failed to load static data, error message = {1}\n{2}", this,
                             e.Message, e.StackTrace));
-                        onCompletePromise.Reject(e);
+                        signal.Promise.Reject(e);
                     }
                 );
         }

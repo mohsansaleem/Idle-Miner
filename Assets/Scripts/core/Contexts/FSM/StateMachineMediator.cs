@@ -3,62 +3,69 @@ using System.Collections.Generic;
 using PG.Core.Contexts.Popup;
 using RSG;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace PG.Core.Contexts
 {
-    public class StateMachineMediator : IInitializable, ITickable, IDisposable
+    public partial class StateMachineMediator : IInitializable, ITickable, IDisposable
     {
-        protected StateBehaviour _currentStateBehaviour;
-        protected Dictionary<Type, StateBehaviour> _stateBehaviours = new Dictionary<Type, StateBehaviour>();
+        protected StateBehaviour CurrentStateBehaviour;
+        protected Dictionary<int, StateBehaviour> StateBehaviours = new Dictionary<int, StateBehaviour>();
+        
+        protected CompositeDisposable Disposables;
 
-
-        protected CompositeDisposable _disposables;
-
-        [Inject] protected OpenPopupSignal _openPopupSignal;
+        [Inject] protected SignalBus SignalBus;
 
         public virtual void Initialize()
 		{
-			_disposables = new CompositeDisposable();
+			Disposables = new CompositeDisposable();
         }
 
-        public virtual void GoToState(Type stateType)
+        public virtual void GoToState(int stateType)
         {
-            if (_stateBehaviours.ContainsKey(stateType)  && _currentStateBehaviour != _stateBehaviours[stateType])
+            if (!StateBehaviours.ContainsKey(stateType))
             {
-                if (_currentStateBehaviour != null)
-                {
-                    _currentStateBehaviour.OnStateExit();
-                }
-                _currentStateBehaviour = _stateBehaviours[stateType];
+                Debug.LogError("State Missing in Mediator.");
+            }
+            else if(CurrentStateBehaviour == null || StateBehaviours[stateType] != CurrentStateBehaviour)
+            {
+                GoToStateInternal(stateType);
+            }
+        }
+        
+        private void GoToStateInternal(int stateType)
+        {
+            if (StateBehaviours.ContainsKey(stateType))
+            {
+                CurrentStateBehaviour?.OnStateExit();
+                CurrentStateBehaviour = StateBehaviours[stateType];
                 
-                _currentStateBehaviour.OnStateEnter();
+                CurrentStateBehaviour.OnStateEnter();
+            }
+            else
+            {
+                Debug.LogError($"State Id[{stateType}] doesn't Exist in the Dictionary.");
             }
         }
 
         public virtual Promise<IPopupResult> ShowPopup(IPopupConfig popupConfig)
         {
-            return _openPopupSignal.ShowPopup(popupConfig);
+            return OpenPopupSignal.ShowPopup(popupConfig, SignalBus);
         }
 
         public virtual void Tick()
         {
-            if (_currentStateBehaviour != null)
-            {
-                _currentStateBehaviour.Tick();
-            }
+            CurrentStateBehaviour?.Tick();
         }
 
         public virtual void Dispose()
         {
-            if (_currentStateBehaviour != null)
-            {
-                _currentStateBehaviour.OnStateExit();
-            }
+            CurrentStateBehaviour?.OnStateExit();
 
-            _disposables.Dispose();
+            Disposables.Dispose();
 
-            _stateBehaviours.Clear();
+            StateBehaviours.Clear();
         }
     }
 }

@@ -8,11 +8,8 @@ namespace PG.IdleMiner.Contexts.Startup
     {
         public class StartupStateGamePlay : StartupState
         {
-            private readonly SaveUserDataSignal _saveUserDataSignal;
-
-            public StartupStateGamePlay(StartupMediator mediator):base(mediator)
+            public StartupStateGamePlay(StartupMediator mediator) : base(mediator)
             {
-                _saveUserDataSignal = mediator._saveUserDataSignal;
             }
 
             public override void OnStateEnter()
@@ -21,9 +18,9 @@ namespace PG.IdleMiner.Contexts.Startup
 
                 View.Hide();
 
-                Observable.Timer(TimeSpan.FromSeconds(Constants.SaveGameDelay)).Repeat().Subscribe((interval) => _saveUserDataSignal.Fire()).AddTo(_disposables);
+                Observable.Timer(TimeSpan.FromSeconds(Constants.SaveGameDelay)).Repeat()
+                    .Subscribe((interval) => SignalBus.Fire<SaveUserDataSignal>()).AddTo(Disposables);
             }
-
 
 
             public override void OnStateExit()

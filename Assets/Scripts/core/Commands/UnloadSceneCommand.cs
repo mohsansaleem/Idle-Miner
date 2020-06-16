@@ -7,22 +7,16 @@ namespace PG.Core.Commands
     {
         [Inject] private readonly ISceneLoader _sceneLoader;
 
-        public void Execute(LoadSceneCommandParams loadParams)
+        public void Execute(UnloadSceneSignal loadParams)
         {
             _sceneLoader.UnloadScene (loadParams.Scene).Done (
                 () =>
                 {
-                    if (loadParams.OnComplete != null)
-                    {
-                        loadParams.OnComplete.Resolve();
-                    }
+                    loadParams.OnComplete?.Resolve();
                 },
                 exception =>
                 {
-                    if (loadParams.OnComplete != null)
-                    {
-                        loadParams.OnComplete.Reject(exception);
-                    }
+                    loadParams.OnComplete?.Reject(exception);
                 }
             );
         }

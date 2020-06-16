@@ -14,7 +14,7 @@ namespace PG.IdleMiner.Commands
     {
         [Inject] private readonly StartupModel _startupModel;
 
-        public void Execute(CreateUserDataSignalParams commandParams)
+        public void Execute(CreateUserDataSignal commandParams)
         {
             try
             {

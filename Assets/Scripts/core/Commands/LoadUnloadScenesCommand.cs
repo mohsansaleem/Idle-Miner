@@ -14,41 +14,27 @@ namespace PG.Core.Commands
         //Each call to load/unload is added into a 
         //promise chain. When complete, the last promise 
         //fires an optional OnComplete delegate.
-        public void Execute(LoadUnloadScenesCommandParams loadUnloadParams)
+        public void Execute(LoadUnloadScenesSignal loadUnloadParams)
         {
             IPromise lastPromise = null;
 
             //Load scenes
             if (loadUnloadParams.LoadScenes != null)
             {
-                for (int i = 0; i < loadUnloadParams.LoadScenes.Length; i++)
+                foreach (var sceneName in loadUnloadParams.LoadScenes)
                 {
-                    string sceneName = loadUnloadParams.LoadScenes[i];
-                    if (lastPromise != null)
-                    {
-                        lastPromise = lastPromise.Then(() => _sceneLoader.LoadScene(sceneName));
-                    }
-                    else
-                    {
-                        lastPromise = _sceneLoader.LoadScene(sceneName);
-                    }
+                    var name = sceneName;
+                    lastPromise = lastPromise != null ? lastPromise.Then(() => _sceneLoader.LoadScene(name)) : _sceneLoader.LoadScene(sceneName);
                 }
             }
 
             //Unload scenes
             if (loadUnloadParams.UnloadScenes != null)
             {
-                for (int i = 0; i < loadUnloadParams.UnloadScenes.Length; i++)
+                foreach (var sceneName in loadUnloadParams.UnloadScenes)
                 {
-                    string sceneName = loadUnloadParams.UnloadScenes[i];
-                    if (lastPromise != null)
-                    {
-                        lastPromise = lastPromise.Then(() => _sceneLoader.UnloadScene(sceneName));
-                    }
-                    else
-                    {
-                        lastPromise = _sceneLoader.UnloadScene(sceneName);
-                    }
+                    var name = sceneName;
+                    lastPromise = lastPromise != null ? lastPromise.Then(() => _sceneLoader.UnloadScene(name)) : _sceneLoader.UnloadScene(sceneName);
                 }
             }
 
@@ -58,30 +44,21 @@ namespace PG.Core.Commands
                 lastPromise.Done(
                     () =>
                     {
-                        Debug.Log(string.Format("{0} , scene loading/unloading completed!", this));
+                        Debug.Log($"{this} , scene loading/unloading completed!");
 
-                        if (loadUnloadParams.OnComplete != null)
-                        {
-                            loadUnloadParams.OnComplete.Resolve();
-                        }
+                        loadUnloadParams.OnComplete?.Resolve();
                     },
-                    exception => 
+                    exception =>
                     {
-                        if (loadUnloadParams.OnComplete != null)
-                        {
-                            loadUnloadParams.OnComplete.Reject(exception);
-                        }
+                        loadUnloadParams.OnComplete?.Reject(exception);
                     }
                 );
             }
             else
             {
-                Debug.Log(string.Format("{0} , no scenes loaded/unloaded!", this));
+                Debug.Log($"{this} , no scenes loaded/unloaded!");
 
-                if (loadUnloadParams.OnComplete != null)
-                {
-                    loadUnloadParams.OnComplete.Resolve();
-                }
+                loadUnloadParams.OnComplete?.Resolve();
             }
         }
     }

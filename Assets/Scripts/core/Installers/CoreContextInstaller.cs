@@ -8,25 +8,27 @@ namespace PG.Core.Installers
     {
         public override void InstallBindings()
         {
+            SignalBusInstaller.Install(Container);
+            
             Container.DeclareSignal<LoadSceneSignal>();
-            Container.BindSignal<LoadSceneCommandParams, LoadSceneSignal>()
-                .To<LoadSceneCommand>((x, loadParams) => x.Execute(loadParams))
-                .AsTransient();
+            Container.BindSignal<LoadSceneSignal>()
+                .ToMethod<LoadSceneCommand>(x => x.Execute)
+                .FromNew();
 
             Container.DeclareSignal<LoadUnloadScenesSignal>();
-            Container.BindSignal<LoadUnloadScenesCommandParams, LoadUnloadScenesSignal>()
-                .To<LoadUnloadScenesCommand>((x, loadParams) => x.Execute(loadParams))
-                .AsTransient();
+            Container.BindSignal<LoadUnloadScenesSignal>()
+                .ToMethod<LoadUnloadScenesCommand>(x => x.Execute)
+                .FromNew();
 
             Container.DeclareSignal<UnloadSceneSignal>();
-            Container.BindSignal<LoadSceneCommandParams, UnloadSceneSignal>()
-                .To<UnloadSceneCommand>((x, loadParams) => x.Execute(loadParams))
-                .AsTransient();
+            Container.BindSignal<UnloadSceneSignal>()
+                .ToMethod<UnloadSceneCommand>(x => x.Execute)
+                .FromNew();
 
             Container.DeclareSignal<UnloadAllScenesExceptSignal>();
-            Container.BindSignal<LoadSceneCommandParams, UnloadAllScenesExceptSignal>()
-                .To<UnloadAllScenesExceptCommand>((x, loadParams) => x.Execute(loadParams))
-                .AsTransient();
+            Container.BindSignal<UnloadAllScenesExceptSignal>()
+                .ToMethod<UnloadAllScenesExceptCommand>(x => x.Execute)
+                .FromNew();
 
             Container.DeclareSignal<OpenPopupSignal>();
 

@@ -4,20 +4,26 @@ using Zenject;
 
 namespace PG.IdleMiner.Contexts.Startup
 {
-    public class LoadStaticDataSignal : Signal<Promise, LoadStaticDataSignal> { }
-    public class LoadUserDataSignal : Signal<Promise, LoadUserDataSignal> { }
-    public class SaveUserDataSignal : Signal<SaveUserDataSignal> { }
-    public class CreateUserDataSignal : Signal<CreateUserDataSignalParams, CreateUserDataSignal> { }
-    public class CreateUserDataSignalParams
+    public class LoadStaticDataSignal
+    {
+        public Promise Promise;
+    }
+
+    public class LoadUserDataSignal
+    {
+        public Promise Promise;
+    }
+    public class SaveUserDataSignal { }
+
+    public class CreateUserDataSignal
     {
         public UserData UserData;
         public Promise OnUserCreated;
 
-        public CreateUserDataSignalParams(UserData userData, Promise promise)
+        public CreateUserDataSignal(UserData userData, Promise promise)
         {
             UserData = userData;
             OnUserCreated = promise;
         }
     }
-
 }

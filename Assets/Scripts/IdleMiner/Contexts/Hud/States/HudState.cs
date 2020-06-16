@@ -12,7 +12,7 @@ namespace PG.IdleMiner.view
             protected readonly HudModel HudModel;
             protected readonly HudView View;
 
-            public HudState(HudMediator mediator)
+            public HudState(HudMediator mediator) : base(mediator)
             {
                 Mediator = mediator;
                 HudModel = mediator._hudModel;

@@ -11,7 +11,7 @@ namespace PG.IdleMiner.Contexts.Startup
             protected readonly StartupModel StartupModel;
             protected readonly StartupView View;
 
-            public StartupState(StartupMediator mediator)
+            public StartupState(StartupMediator mediator) : base(mediator)
             {
                 Mediator = mediator;
                 StartupModel = mediator._startupModel;

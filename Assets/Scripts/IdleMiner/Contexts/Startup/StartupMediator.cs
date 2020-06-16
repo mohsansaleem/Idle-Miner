@@ -15,18 +15,10 @@ namespace PG.IdleMiner.Contexts.Startup
 
         [Inject] private readonly StartupModel _startupModel;
         [Inject] private readonly RemoteDataModel _remoteDataModel;
-        
-        [Inject] private readonly LoadUnloadScenesSignal _loadUnloadScenesSignal;
-        [Inject] private readonly UnloadSceneSignal _unloadSceneSignal;
-        [Inject] private readonly UnloadAllScenesExceptSignal _unloadAllScenesExceptSignal;
-        [Inject] private readonly LoadStaticDataSignal _loadStaticDataSignal;
-        [Inject] private readonly LoadUserDataSignal _loadUserDataSignal;
-        [Inject] private readonly SaveUserDataSignal _saveUserDataSignal;
-        [Inject] private readonly CreateUserDataSignal _createUserDataSignal;
 
         public StartupMediator()
         {
-            _disposables = new CompositeDisposable();
+            Disposables = new CompositeDisposable();
         }
 
         public override void Initialize()
@@ -34,63 +26,31 @@ namespace PG.IdleMiner.Contexts.Startup
             base.Initialize();
 
             // TODO: Odd collection. Figure something out for states tracking.
-            _stateBehaviours.Add(typeof(StartupStateLoadPopup), new StartupStateLoadPopup(this));
-            _stateBehaviours.Add(typeof(StartupStateLoadStaticData), new StartupStateLoadStaticData(this));
-            _stateBehaviours.Add(typeof(StartupStateLoadUserData), new StartupStateLoadUserData(this));
-            _stateBehaviours.Add(typeof(StartupStateCreateUserData), new StartupStateCreateUserData(this));
-            _stateBehaviours.Add(typeof(StartupStateLoadHud), new StartupStateLoadHud(this));
-            _stateBehaviours.Add(typeof(StartupStateLoadGamePlay), new StartupStateLoadGamePlay(this));
-            _stateBehaviours.Add(typeof(StartupStateGamePlay), new StartupStateGamePlay(this));
+            StateBehaviours.Add((int)StartupModel.ELoadingProgress.LoadPopup, new StartupStateLoadPopup(this));
+            StateBehaviours.Add((int)StartupModel.ELoadingProgress.LoadStaticData, new StartupStateLoadStaticData(this));
+            StateBehaviours.Add((int)StartupModel.ELoadingProgress.LoadUserData, new StartupStateLoadUserData(this));
+            StateBehaviours.Add((int)StartupModel.ELoadingProgress.CreateUserData, new StartupStateCreateUserData(this));
+            StateBehaviours.Add((int)StartupModel.ELoadingProgress.LoadHud, new StartupStateLoadHud(this));
+            StateBehaviours.Add((int)StartupModel.ELoadingProgress.LoadGamePlay, new StartupStateLoadGamePlay(this));
+            StateBehaviours.Add((int)StartupModel.ELoadingProgress.GamePlay, new StartupStateGamePlay(this));
 
-            _startupModel.LoadingProgress.Subscribe(OnLoadingProgressChanged).AddTo(_disposables);
+            _startupModel.LoadingProgress.Subscribe(OnLoadingProgressChanged).AddTo(Disposables);
         }
 
         private void OnLoadingProgressChanged(StartupModel.ELoadingProgress loadingProgress)
         {
             _view.ProgressBar.value = (float)loadingProgress / 100;
 
-
-            Type targetType = null;
-            switch (loadingProgress)
-            {
-                case StartupModel.ELoadingProgress.Zero:
-                    targetType = typeof(StartupStateLoadPopup);
-                    break;
-                case StartupModel.ELoadingProgress.PopupLoaded:
-                    targetType = typeof(StartupStateLoadStaticData);
-                    break;
-                case StartupModel.ELoadingProgress.StaticDataLoaded:
-                    targetType = typeof(StartupStateLoadUserData);
-                    break;
-                case StartupModel.ELoadingProgress.UserNotFound:
-                    targetType = typeof(StartupStateCreateUserData);
-                    break;
-                case StartupModel.ELoadingProgress.DataSeeded:
-                    targetType = typeof(StartupStateLoadHud);
-                    break;
-                case StartupModel.ELoadingProgress.HudLoaded:
-                    targetType = typeof(StartupStateLoadGamePlay);
-                    break;
-                case StartupModel.ELoadingProgress.GamePlayLoaded:
-                    targetType = typeof(StartupStateGamePlay);
-                    break;
-            }
-
-            if (targetType != null &&
-                (_currentStateBehaviour == null ||
-                 targetType != _currentStateBehaviour.GetType()))
-            {
-                GoToState(targetType);
-            }
+            GoToState((int)loadingProgress);
         }
 
         private void OnReload()
         {
-            _unloadAllScenesExceptSignal.UnloadAllExcept(ProjectScenes.Startup).Done
+            UnloadAllScenesExceptSignal.UnloadAllExcept(ProjectScenes.Startup, SignalBus).Done
             (
                 () =>
                 {
-                    _startupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.Zero;
+                    _startupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.LoadPopup;
                 },
                 exception =>
                 {

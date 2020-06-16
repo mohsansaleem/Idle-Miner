@@ -14,16 +14,24 @@ namespace PG.IdleMiner.Contexts.Startup
         public override void InstallBindings()
         {
             Container.DeclareSignal<LoadStaticDataSignal>();
-            Container.BindSignal<Promise, LoadStaticDataSignal>().To<LoadStaticDataCommand>((x, promise) => x.Execute(promise)).AsSingle();
+            Container.BindSignal<LoadStaticDataSignal>()
+                .ToMethod<LoadStaticDataCommand>((x) => x.Execute)
+                .FromNew();
 
             Container.DeclareSignal<LoadUserDataSignal>();
-            Container.BindSignal<Promise, LoadUserDataSignal>().To<LoadUserDataCommand>((x, promise) => x.Execute(promise)).AsSingle();
+            Container.BindSignal<LoadUserDataSignal>()
+                .ToMethod<LoadUserDataCommand>((x) => x.Execute)
+                .FromNew();
 
             Container.DeclareSignal<SaveUserDataSignal>();
-            Container.BindSignal<SaveUserDataSignal>().To<SaveUserDataCommand>((x) => x.Execute()).AsSingle();
+            Container.BindSignal<SaveUserDataSignal>()
+                .ToMethod<SaveUserDataCommand>((x) => x.Execute)
+                .FromNew();
 
             Container.DeclareSignal<CreateUserDataSignal>();
-            Container.BindSignal<CreateUserDataSignalParams, CreateUserDataSignal>().To<CreateUserDataCommand>((x, param) => x.Execute(param)).AsSingle();
+            Container.BindSignal<CreateUserDataSignal>()
+                .ToMethod<CreateUserDataCommand>((x) => x.Execute)
+                .FromNew();
 
             Container.Bind<StartupModel>().AsSingle();
 

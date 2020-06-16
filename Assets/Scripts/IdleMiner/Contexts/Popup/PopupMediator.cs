@@ -12,8 +12,8 @@ namespace PG.IdleMiner.view.popup
     {
         [Inject] private readonly PopupView _view;
         [Inject] private readonly PopupSystemDataModel _popupSystemDataModel;
-
-        [Inject] private readonly OpenPopupSignal _openPopupSignal;
+        
+        [Inject] private readonly SignalBus _signalBus;
 
         private readonly CompositeDisposable _disposables;
 
@@ -29,9 +29,12 @@ namespace PG.IdleMiner.view.popup
             _popupSystemDataModel.Popups.ObserveRemove().Subscribe(OnPopupRemove).AddTo(_disposables);
 
             _view.OnPopupButtonClicked = OnPopupButtonClicked;
+            
+            // Listening to Popup Signal.
+            _signalBus.Subscribe<OpenPopupSignal>(Execute);
         }
 
-        public void Execute(OpenPopupSignalParams openPopupSignalParams)
+        public void Execute(OpenPopupSignal openPopupSignalParams)
         {
             PopupData popupData = new PopupData()
             {
@@ -73,6 +76,7 @@ namespace PG.IdleMiner.view.popup
 
         public void Dispose()
         {
+            _signalBus.Unsubscribe<OpenPopupSignal>(Execute);
             _disposables.Dispose();
         }
     }

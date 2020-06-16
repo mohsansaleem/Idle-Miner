@@ -3,18 +3,21 @@ using Zenject;
 
 namespace PG.Core.Contexts.Popup
 {
-    public class OpenPopupSignal : Signal<OpenPopupSignalParams, OpenPopupSignal>
+    public class OpenPopupSignal
     {
-        public Promise<IPopupResult> ShowPopup(IPopupConfig popupConfig)
+        public IPopupConfig PopupConfig;
+        public Promise<IPopupResult> OnPopupComplete;
+        
+        public static Promise<IPopupResult> ShowPopup(IPopupConfig popupConfig, SignalBus signalBus)
         {
-            OpenPopupSignalParams openPopupParams =
-                new OpenPopupSignalParams
+            OpenPopupSignal openPopupParams =
+                new OpenPopupSignal
                 {
                     OnPopupComplete = new Promise<IPopupResult>(),
                     PopupConfig = popupConfig
                 };
 
-            Fire(openPopupParams);
+            signalBus.Fire(openPopupParams);
 
             return openPopupParams.OnPopupComplete;
         }

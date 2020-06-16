@@ -1,6 +1,7 @@
 ﻿using PG.Core.Contexts;
 using PG.IdleMiner.Models.MediatorModels;
 using PG.IdleMiner.Views.GamePlay;
+using Zenject;
 
 namespace PG.IdleMiner.Contexts.GamePlay
 {
@@ -12,7 +13,7 @@ namespace PG.IdleMiner.Contexts.GamePlay
             protected readonly GamePlayModel GamePlayModel;
             protected readonly GamePlayView View;
 
-            public GamePlayState(GamePlayMediator mediator)
+            public GamePlayState(GamePlayMediator mediator) : base(mediator)
             {
                 Mediator = mediator;
                 GamePlayModel = mediator._gamePlayModel;

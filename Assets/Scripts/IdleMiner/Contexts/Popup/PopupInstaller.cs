@@ -14,11 +14,6 @@ namespace PG.IdleMiner.view.popup
         {
             Container.BindInstance(PopupView);
             Container.BindInterfacesTo<PopupMediator>().AsSingle();
-
-            // Listening to Popup Signal.
-            Container.BindSignal<OpenPopupSignalParams, OpenPopupSignal>()
-                .To<PopupMediator>((x, popupSignalParams) => x.Execute(popupSignalParams))
-                .AsCached();
         }
     }
 }

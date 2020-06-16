@@ -1,34 +1,44 @@
 ﻿using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace PG.Core.Contexts
 {
-    public class StateBehaviour
+    public partial class StateMachineMediator
     {
-        protected CompositeDisposable _disposables;
-
-        public virtual void OnStateEnter()
+        public class StateBehaviour
         {
-            Debug.Log(string.Format("{0} , OnStateEnter()", this));
+            protected CompositeDisposable Disposables;
+            protected readonly SignalBus SignalBus;
 
-            _disposables = new CompositeDisposable();
-        }
+            public StateBehaviour(StateMachineMediator mediator)
+            {
+                SignalBus = mediator.SignalBus;
+            }
 
-        public virtual void OnStateExit()
-        {
-            Debug.Log(string.Format("{0} , OnStateExit()", this));
+            public virtual void OnStateEnter()
+            {
+                Debug.Log(string.Format("{0} , OnStateEnter()", this));
 
-            _disposables.Dispose();
-        }
+                Disposables = new CompositeDisposable();
+            }
 
-        public virtual bool IsValidOpenState()
-        {
-            return false;
-        }
+            public virtual void OnStateExit()
+            {
+                Debug.Log(string.Format("{0} , OnStateExit()", this));
 
-        public virtual void Tick()
-        {
+                Disposables.Dispose();
+            }
 
+            public virtual bool IsValidOpenState()
+            {
+                return false;
+            }
+
+            public virtual void Tick()
+            {
+
+            }
         }
     }
 }

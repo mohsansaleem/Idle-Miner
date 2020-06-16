@@ -2,8 +2,8 @@
 
 namespace PG.IdleMiner.Contexts.GamePlay
 {
-    public class AddShaftSignal : Signal<AddShaftSignal> { }
+    public class AddShaftSignal { }
     
-    public class UpgradeElevatorSignal : Signal<UpgradeElevatorSignal> { }
-    public class UpgradeWarehouseSignal : Signal<UpgradeElevatorSignal> { }
+    public class UpgradeElevatorSignal { }
+    public class UpgradeWarehouseSignal { }
 }

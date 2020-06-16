@@ -3,7 +3,7 @@
 This is a simulation game with the raw UI. Primary purpose of this project was to implement an expandable code architecture. 
 
 ##### Highlights:
-  - Unity 2018.2.0f2
+  - Unity 2019.4.0f1
   - MVC
   - Dependency Injection
   - Reactive Programing
@@ -22,20 +22,20 @@ This is a simulation game with the raw UI. Primary purpose of this project was t
 
 #### Installation
   - Pull the code.
-  - Use Unity 2018.2.0f2 to open it.
+  - Use Unity 2019.4.0f1 to open it.
   - Check /MainMenu/Potato-Games/Always Start from Startup Scene.
   - Press Play.
 
 #### Hierarchy Overview:
-  - All the scenes code is in __\Assets\Scripts\IdleMiner\Scenes__. Each scene has the respective folders including some extra scenes like Popup and Hud etc.
+  - All the Context code is in __\Assets\Scripts\IdleMiner\Contexts__. Each scene has the respective folders including some extra scenes like Popup and Hud etc.
   - __GamePlay__ scene has all the __magic__.
   - __Bootstrap__ is the starting scene.
   - __*Data__ files\classes are for __Metadata__ objects.
   - __*RemoteData__ files/classes are for __GameState__ objects and I am linking the *Data on loading of GameState.
   - __*RemoteDataModel__ are the Models that contain __RemoteData__ and other reactive properties and collections.
   - __\Assets\Scripts\Core__ is __submodule__ that contains just the abstract of some generics that can be shared across the project so I have added it to minimise my work.
-  - All the __Scenes__ and __respective resources__ are in __\Assets\Resources__
-  - Main __Game code__ is in __\Assets\Scripts\IdleMiner\.
+  - All the __Scenes__ are in __Scenes__ folder and __respective resources__ are in __\Assets\Resources\Scenes__
+  - Main __Game code__ is in __\Assets\Scripts\IdleMiner__.
   - (__Models__, __RemoteData__ and __Data__)__s__ are in __\Assets\Scripts\IdleMiner\Models__.
   - All the __Commands__ are in   __\Assets\Scripts\IdleMiner\Commands__.
 
@@ -62,8 +62,8 @@ Create PR if you want to change something.
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
 
-   [Unity3D]: <https://unity3d.com/unity/whats-new/unity-2018.2.0>
-   [Zenject]: < https://github.com/svermeulen/Zenject>
+   [Unity3D]: <https://unity.com/releases/2019-lts>
+   [Zenject]: <https://github.com/svermeulen/Zenject>
    [UniRx]: <https://github.com/neuecc/UniRx>
    [C# Promises]: <https://github.com/Real-Serious-Games/C-Sharp-Promise>
    [Spine]: <http://esotericsoftware.com/>

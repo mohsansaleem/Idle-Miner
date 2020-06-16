@@ -7,23 +7,17 @@ namespace PG.IdleMiner.Contexts.Startup
     {
         public class StartupStateLoadGamePlay : StartupState
         {
-            private readonly LoadUnloadScenesSignal _loadUnloadScenesSignal;
-
-            public StartupStateLoadGamePlay(StartupMediator mediator):base(mediator)
+            public StartupStateLoadGamePlay(StartupMediator mediator) : base(mediator)
             {
-                _loadUnloadScenesSignal = Mediator._loadUnloadScenesSignal;
             }
 
             public override void OnStateEnter()
             {
                 base.OnStateEnter();
 
-                _loadUnloadScenesSignal.Load(new[] { ProjectScenes.Game }).Done
+                LoadUnloadScenesSignal.Load(new[] {ProjectScenes.Game}, SignalBus).Done
                 (
-                    () =>
-                    {
-                        StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.GamePlayLoaded;
-                    }
+                    () => { StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.GamePlay; }
                 );
             }
         }

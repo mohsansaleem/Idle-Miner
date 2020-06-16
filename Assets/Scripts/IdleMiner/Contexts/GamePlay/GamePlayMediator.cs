@@ -19,33 +19,31 @@ namespace PG.IdleMiner.Contexts.GamePlay
         [Inject] private readonly RemoteDataModel _remoteDataModel;
         [Inject] private readonly StaticDataModel _staticDataModel;
 
-        [Inject] private readonly AddShaftSignal _addShaftSignal;
-
         public GamePlayMediator()
         {
-            _disposables = new CompositeDisposable();
+            Disposables = new CompositeDisposable();
         }
 
         public override void Initialize()
         {
             base.Initialize();
             
-            _stateBehaviours.Add(typeof(GamePlayStateDefault), new GamePlayStateDefault(this));
+            StateBehaviours.Add((int)GamePlayModel.EGamePlayState.Game, new GamePlayStateDefault(this));
             
             foreach(ShaftRemoteDataModel shaft in _remoteDataModel.Shafts)
             {
                 SetupShaft(shaft);
             }
 
-            _remoteDataModel.Shafts.ObserveAdd().Subscribe(OnShaftAdd).AddTo(_disposables);
+            _remoteDataModel.Shafts.ObserveAdd().Subscribe(OnShaftAdd).AddTo(Disposables);
 
-            _remoteDataModel.Warehouse.ReactiveWarehouse.Subscribe(_view.UpdateWarehouse).AddTo(_disposables);
+            _remoteDataModel.Warehouse.ReactiveWarehouse.Subscribe(_view.UpdateWarehouse).AddTo(Disposables);
             _remoteDataModel.Elevator.ReactiveElevator.Subscribe((e) => { _view.UpdateElevator(e, _remoteDataModel.Shafts.Count * Constants.ShaftDistance); });
             
             _view.SubscribeUpgradeElevator(OnElevatorUpgradeRequest);
             _view.SubscribeUpgradeWareHouse(OnWareHouseUpgradeRequest);
             
-            _gamePlayModel.GamePlayState.Subscribe(OnGamePlayStateChanged).AddTo(_disposables);
+            _gamePlayModel.GamePlayState.Subscribe(OnGamePlayStateChanged).AddTo(Disposables);
         }
 
         public void OnShaftAdd(CollectionAddEvent<ShaftRemoteDataModel> evt)
@@ -62,7 +60,7 @@ namespace PG.IdleMiner.Contexts.GamePlay
                 shaftRemoteDataModel.Upgrade();
             };
             
-            shaftRemoteDataModel.ReactiveShaft.Subscribe(_view.UpdateShaft).AddTo(_disposables);
+            shaftRemoteDataModel.ReactiveShaft.Subscribe(_view.UpdateShaft).AddTo(Disposables);
         }
         
         public void OnElevatorUpgradeRequest()
@@ -78,20 +76,7 @@ namespace PG.IdleMiner.Contexts.GamePlay
 
         private void OnGamePlayStateChanged(GamePlayModel.EGamePlayState gamePlayState)
         {
-            Type targetType = null;
-            switch (gamePlayState)
-            {
-                case GamePlayModel.EGamePlayState.Game:
-                    targetType = typeof(GamePlayStateDefault);
-                    break;
-            }
-
-            if (targetType != null &&
-                (_currentStateBehaviour == null ||
-                 targetType != _currentStateBehaviour.GetType()))
-            {
-                GoToState(targetType);
-            }
+            GoToState((int)gamePlayState);
         }
 
         public override void Dispose()

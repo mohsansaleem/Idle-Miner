@@ -7,29 +7,21 @@ namespace PG.IdleMiner.Contexts.Startup
     {
         public class StartupStateLoadUserData : StartupState
         {
-            private readonly LoadUserDataSignal _loadUserDataSignal;
-
             public StartupStateLoadUserData(StartupMediator mediator) : base(mediator)
             {
-                _loadUserDataSignal = mediator._loadUserDataSignal;
             }
 
             public override void OnStateEnter()
             {
                 base.OnStateEnter();
 
-                Promise UserDataPromise = new Promise();
+                LoadUserDataSignal signal = new LoadUserDataSignal() {Promise = new Promise()};
 
-                UserDataPromise.Then(
-                    () => {
-                        StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.DataSeeded;
-                    }
-                ).Catch(e =>
-                {
-                    StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.UserNotFound;
-                });
+                signal.Promise.Then(
+                    () => { StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.LoadHud; }
+                ).Catch(e => { StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.CreateUserData; });
 
-                _loadUserDataSignal.Fire(UserDataPromise);
+                SignalBus.Fire(signal);
             }
         }
     }

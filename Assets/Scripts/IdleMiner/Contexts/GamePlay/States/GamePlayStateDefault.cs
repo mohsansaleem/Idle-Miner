@@ -4,10 +4,8 @@
     {
         public class GamePlayStateDefault : GamePlayState
         {
-            private readonly AddShaftSignal _addShaftSignal;
             public GamePlayStateDefault(GamePlayMediator mediator):base(mediator)
             {
-                _addShaftSignal = mediator._addShaftSignal;
             }
 
             public override void OnStateEnter()
@@ -19,7 +17,7 @@
 
             private void OnAddShaftButtonClicked()
             {
-                _addShaftSignal.Fire();
+                SignalBus.Fire<AddShaftSignal>();
             }
 
             public override void OnStateExit()

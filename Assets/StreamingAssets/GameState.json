@@ -2,36 +2,41 @@
   "Shafts": [
     {
       "Id": "S1",
-      "Level": 7,
+      "Level": 10,
       "Manager": "MM1",
-      "BinCash": 220.0,
+      "BinCash": 300.0,
       "Miners": [
         {
-          "MinedCash": 110.0,
-          "CurrentLocation": 3.441986,
-          "MinerState": 20
+          "MinedCash": 0.0,
+          "CurrentLocation": 1.89913845,
+          "MinerState": 10
         },
         {
-          "MinedCash": 18.715934753417969,
-          "CurrentLocation": 8.047485,
-          "MinerState": 5
+          "MinedCash": 150.0,
+          "CurrentLocation": 6.398511,
+          "MinerState": 20
         }
       ]
     },
     {
       "Id": "S2",
-      "Level": 6,
+      "Level": 10,
       "Manager": "M1",
-      "BinCash": 2000.0,
+      "BinCash": 12179.382920265198,
       "Miners": [
         {
-          "MinedCash": 642.59147644042969,
-          "CurrentLocation": 8.065685,
-          "MinerState": 5
+          "MinedCash": 1500.0,
+          "CurrentLocation": 7.10209,
+          "MinerState": 20
         },
         {
           "MinedCash": 0.0,
-          "CurrentLocation": 1.350111,
+          "CurrentLocation": 3.44410086,
+          "MinerState": 10
+        },
+        {
+          "MinedCash": 0.0,
+          "CurrentLocation": 5.42580462,
           "MinerState": 10
         }
       ]
@@ -40,42 +45,78 @@
       "Id": "S3",
       "Level": 10,
       "Manager": "M1",
-      "BinCash": 4500.0,
+      "BinCash": 15000.0,
       "Miners": [
         {
+          "MinedCash": 1500.0,
+          "CurrentLocation": 7.01429272,
+          "MinerState": 20
+        },
+        {
+          "MinedCash": 1500.0,
+          "CurrentLocation": 2.72173977,
+          "MinerState": 20
+        },
+        {
           "MinedCash": 0.0,
-          "CurrentLocation": 6.14312029,
+          "CurrentLocation": 7.146212,
+          "MinerState": 10
+        }
+      ]
+    },
+    {
+      "Id": "S4",
+      "Level": 8,
+      "Manager": "M1",
+      "BinCash": 8400.0,
+      "Miners": [
+        {
+          "MinedCash": 1200.0,
+          "CurrentLocation": 5.518366,
+          "MinerState": 20
+        },
+        {
+          "MinedCash": 0.0,
+          "CurrentLocation": 3.57157183,
           "MinerState": 10
         },
         {
-          "MinedCash": 831.73732757568359,
-          "CurrentLocation": 8.031518,
+          "MinedCash": 1159.9805355072021,
+          "CurrentLocation": 8.053847,
           "MinerState": 5
-        },
+        }
+      ]
+    },
+    {
+      "Id": "S5",
+      "Level": 1,
+      "Manager": "M1",
+      "BinCash": 1000.0,
+      "Miners": [
         {
-          "MinedCash": 0.0,
-          "CurrentLocation": 0.151983261,
-          "MinerState": 10
+          "MinedCash": 270.82886695861816,
+          "CurrentLocation": 8.013898,
+          "MinerState": 5
         }
       ]
     }
   ],
   "Elevator": {
-    "ElevatorLevel": 4,
-    "StoredCash": 0.0,
-    "LoadedCash": 9330.0,
-    "CurrentLocation": 1.19209,
+    "ElevatorLevel": 6,
+    "StoredCash": 32421.879768371582,
+    "LoadedCash": 11820.617079734802,
+    "CurrentLocation": 8.057344,
     "Manager": "EM1",
-    "ElevatorState": 20
+    "ElevatorState": 5
   },
   "Warehouse": {
     "Level": 4,
     "Manager": "WHM1",
     "Transporters": [
       {
-        "LoadedCash": 0.0,
-        "CurrentLocation": 4.18897152,
-        "TransporterState": 10
+        "LoadedCash": 23578.120231628418,
+        "CurrentLocation": 10.0150566,
+        "TransporterState": 5
       },
       {
         "LoadedCash": 0.0,
@@ -105,7 +146,7 @@
     ]
   },
   "IdleCash": 0.0,
-  "Cash": 124700.0,
+  "Cash": 308930.0,
   "SuperCash": 0.0,
-  "LastSaved": "2020-06-17T00:52:50.331068+05:00"
+  "LastSaved": "2020-06-17T02:13:40.104133+05:00"
 }

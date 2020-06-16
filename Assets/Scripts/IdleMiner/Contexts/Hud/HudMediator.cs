@@ -17,20 +17,20 @@ namespace PG.IdleMiner.view
 
         public HudMediator()
         {
-            _disposables = new CompositeDisposable();
+            Disposables = new CompositeDisposable();
         }
 
         public override void Initialize()
         {
             base.Initialize();
             
-            _stateBehaviours.Add(typeof(HudStateStartup), new HudStateStartup(this));
+            StateBehaviours.Add((int)HudModel.EHudState.StartupScreen, new HudStateStartup(this));
 
-            _remoteDataModel.IdleCash.Subscribe(OnIdleCashUpdate).AddTo(_disposables);
-            _remoteDataModel.Cash.Subscribe(OnCashUpdate).AddTo(_disposables);
-            _remoteDataModel.SuperCash.Subscribe(OnSuperCashUpdate).AddTo(_disposables);
+            _remoteDataModel.IdleCash.Subscribe(OnIdleCashUpdate).AddTo(Disposables);
+            _remoteDataModel.Cash.Subscribe(OnCashUpdate).AddTo(Disposables);
+            _remoteDataModel.SuperCash.Subscribe(OnSuperCashUpdate).AddTo(Disposables);
 
-            _hudModel.HudState.Subscribe(OnHudStateChanged).AddTo(_disposables);
+            _hudModel.HudState.Subscribe(OnHudStateChanged).AddTo(Disposables);
         }
 
         private void OnIdleCashUpdate(double idleCash)
@@ -50,20 +50,7 @@ namespace PG.IdleMiner.view
 
         private void OnHudStateChanged(HudModel.EHudState hudState)
         {
-            Type targetType = null;
-            switch (hudState)
-            {
-                case HudModel.EHudState.StartupScreen:
-                    targetType = typeof(HudStateStartup);
-                    break;
-            }
-
-            if (targetType != null &&
-                (_currentStateBehaviour == null ||
-                 targetType != _currentStateBehaviour.GetType()))
-            {
-                GoToState(targetType);
-            }
+            GoToState((int)hudState);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace PG.IdleMiner.Commands
     {
         [Inject] private RemoteDataModel _remoteDataModel;
 
-        public override void Execute()
+        public void Execute()
         {
             try
             {

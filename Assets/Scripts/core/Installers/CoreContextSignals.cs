@@ -4,152 +4,153 @@ using Zenject;
 
 namespace PG.Core.Installers
 {
-    public class LoadSceneCommandParams : BaseCommandParams
+    public abstract class ASignal
+    {
+        public readonly Promise OnComplete;
+
+        protected ASignal()
+        {
+            OnComplete = new Promise();
+        }
+
+        protected IPromise Fire()
+        {
+            return OnComplete;
+        }
+    }
+
+    public class LoadSceneSignal : ASignal
     {
         public string Scene;
-        public readonly Promise OnComplete;
-
-        public LoadSceneCommandParams()
+        
+        public static IPromise Load(string scene, SignalBus signalBus)
         {
-            OnComplete = new Promise();
-        }
-    }
-
-    public class LoadUnloadScenesCommandParams : BaseCommandParams
-    {
-        public string[] LoadScenes;
-        public string[] UnloadScenes;
-        public readonly Promise OnComplete;
-
-        public LoadUnloadScenesCommandParams()
-        {
-            OnComplete = new Promise();
-        }
-    }
-
-    public class LoadSceneSignal : Signal<LoadSceneCommandParams, LoadSceneSignal>
-    {
-        public IPromise Load(string scene)
-        {
-            LoadSceneCommandParams loadParams = new LoadSceneCommandParams()
+            LoadSceneSignal loadParams = new LoadSceneSignal()
             {
                 Scene = scene
             };
             
-            Fire(loadParams);
+            signalBus.Fire(loadParams);
 
-            return loadParams.OnComplete;
+            return loadParams.Fire();
         }
     }
 
-    public class LoadUnloadScenesSignal : Signal<LoadUnloadScenesCommandParams, LoadUnloadScenesSignal>
+    public class LoadUnloadScenesSignal : ASignal
     {
-        public IPromise Load(string[] loadScenes)
+        public string[] LoadScenes;
+        public string[] UnloadScenes;
+        
+        public static IPromise Load(string[] loadScenes, SignalBus signalBus)
         {
-            LoadUnloadScenesCommandParams loadUnloadParams = new LoadUnloadScenesCommandParams()
+            LoadUnloadScenesSignal loadUnloadParams = new LoadUnloadScenesSignal()
             {
                 LoadScenes = loadScenes,
                 UnloadScenes = null
             };
 
-            Fire(loadUnloadParams);
+            signalBus.Fire(loadUnloadParams);
 
-            return loadUnloadParams.OnComplete;
+            return loadUnloadParams.Fire();
         }
 
-        public IPromise Load(string loadScene)
+        public static IPromise Load(string loadScene, SignalBus signalBus)
         {
-            LoadUnloadScenesCommandParams loadUnloadParams = new LoadUnloadScenesCommandParams()
+            LoadUnloadScenesSignal loadUnloadParams = new LoadUnloadScenesSignal()
             {
                 LoadScenes = new[] { loadScene },
                 UnloadScenes = null
             };
 
-            Fire(loadUnloadParams);
+            signalBus.Fire(loadUnloadParams);
 
-            return loadUnloadParams.OnComplete;
+            return loadUnloadParams.Fire();
         }
 
-        public IPromise Unload(string[] unloadScenes)
+        public static IPromise Unload(string[] unloadScenes, SignalBus signalBus)
         {
-            LoadUnloadScenesCommandParams loadUnloadParams = new LoadUnloadScenesCommandParams()
+            LoadUnloadScenesSignal loadUnloadParams = new LoadUnloadScenesSignal()
             {
                 LoadScenes = null,
                 UnloadScenes = unloadScenes
             };
 
-            Fire(loadUnloadParams);
+            signalBus.Fire(loadUnloadParams);
 
-            return loadUnloadParams.OnComplete;
+            return loadUnloadParams.Fire();
         }
 
-        public IPromise Unload(string unloadScene)
+        public static IPromise Unload(string unloadScene, SignalBus signalBus)
         {
-            LoadUnloadScenesCommandParams loadUnloadParams = new LoadUnloadScenesCommandParams()
+            LoadUnloadScenesSignal loadUnloadParams = new LoadUnloadScenesSignal()
             {
                 LoadScenes = null,
                 UnloadScenes = new[] { unloadScene }
             };
 
-            Fire(loadUnloadParams);
+            signalBus.Fire(loadUnloadParams);
 
-            return loadUnloadParams.OnComplete;
+            return loadUnloadParams.Fire();
         }
 
-        public IPromise LoadUnload(string[] loadScenes, string[] unloadScenes)
+        public static IPromise LoadUnload(string[] loadScenes, string[] unloadScenes, SignalBus signalBus)
         {
-            LoadUnloadScenesCommandParams loadUnloadParams = new LoadUnloadScenesCommandParams()
+            LoadUnloadScenesSignal loadUnloadParams = new LoadUnloadScenesSignal()
             {
                 LoadScenes = loadScenes,
                 UnloadScenes = unloadScenes
             };
 
-            Fire(loadUnloadParams);
+            signalBus.Fire(loadUnloadParams);
 
-            return loadUnloadParams.OnComplete;
+            return loadUnloadParams.Fire();
         }
 
-        public IPromise LoadUnload(string loadScene, string unloadScene)
+        public static IPromise LoadUnload(string loadScene, string unloadScene, SignalBus signalBus)
         {
-            LoadUnloadScenesCommandParams loadUnloadParams = new LoadUnloadScenesCommandParams()
+            LoadUnloadScenesSignal loadUnloadParams = new LoadUnloadScenesSignal()
             {
                 LoadScenes = new[] { loadScene },
                 UnloadScenes = new[] { unloadScene }
             };
 
-            Fire(loadUnloadParams);
+            signalBus.Fire(loadUnloadParams);
 
-            return loadUnloadParams.OnComplete;
+            return loadUnloadParams.Fire();
         }
     }
 
-    public class UnloadSceneSignal : Signal<LoadSceneCommandParams, UnloadSceneSignal>
+    public class UnloadSceneSignal : ASignal
     {
-        public IPromise Unload(string scene)
+        public string Scene;
+        
+        public static IPromise Unload(string scene, SignalBus signalBus)
         {
-            LoadSceneCommandParams unloadParams = new LoadSceneCommandParams()
+            UnloadSceneSignal unloadParams = new UnloadSceneSignal()
             {
                 Scene = scene
             };
 
-            Fire(unloadParams);
+            signalBus.Fire(unloadParams);
 
-            return unloadParams.OnComplete;
+            return unloadParams.Fire();
         }
     }
 
-    public class UnloadAllScenesExceptSignal : Signal<LoadSceneCommandParams, UnloadSceneSignal>
+    public class UnloadAllScenesExceptSignal : ASignal
     {
-        public IPromise UnloadAllExcept(string scene)
+        public string Scene;
+        
+        public static IPromise UnloadAllExcept(string scene, SignalBus signalBus)
         {
-            LoadSceneCommandParams unloadParams = new LoadSceneCommandParams()
+            UnloadAllScenesExceptSignal unloadParams = new UnloadAllScenesExceptSignal()
             {
                 Scene = scene
             };
 
-            Fire(unloadParams);
+            signalBus.Fire(unloadParams);
 
-            return unloadParams.OnComplete;
+            return unloadParams.Fire();
         }
     }
 }
