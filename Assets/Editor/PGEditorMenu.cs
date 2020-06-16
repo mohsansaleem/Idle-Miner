@@ -1,4 +1,4 @@
-﻿using PG.IdleMiner.Scenes.Startup;
+﻿using PG.IdleMiner.Contexts.Startup;
 using UnityEngine;
 using UnityEditor;
 

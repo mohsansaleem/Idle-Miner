@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using PG.IdleMiner.Scenes.Startup;
+using PG.IdleMiner.Contexts.Startup;
 using Newtonsoft.Json;
 using PG.Core.Commands;
 using PG.IdleMiner.Misc;

@@ -4,55 +4,83 @@
       "Id": "S1",
       "Level": 7,
       "Manager": "MM1",
-      "BinCash": 0.0,
+      "BinCash": 220.0,
       "Miners": [
         {
-          "MinedCash": 0.0,
-          "CurrentLocation": 7.967926,
-          "MinerState": 10
+          "MinedCash": 110.0,
+          "CurrentLocation": 3.441986,
+          "MinerState": 20
         },
         {
-          "MinedCash": 110.0,
-          "CurrentLocation": 1.64564133,
-          "MinerState": 20
+          "MinedCash": 18.715934753417969,
+          "CurrentLocation": 8.047485,
+          "MinerState": 5
         }
       ]
     },
     {
       "Id": "S2",
-      "Level": 5,
+      "Level": 6,
       "Manager": "M1",
-      "BinCash": 0.0,
+      "BinCash": 2000.0,
+      "Miners": [
+        {
+          "MinedCash": 642.59147644042969,
+          "CurrentLocation": 8.065685,
+          "MinerState": 5
+        },
+        {
+          "MinedCash": 0.0,
+          "CurrentLocation": 1.350111,
+          "MinerState": 10
+        }
+      ]
+    },
+    {
+      "Id": "S3",
+      "Level": 10,
+      "Manager": "M1",
+      "BinCash": 4500.0,
       "Miners": [
         {
           "MinedCash": 0.0,
-          "CurrentLocation": 5.929903,
+          "CurrentLocation": 6.14312029,
           "MinerState": 10
         },
         {
-          "MinedCash": 900.0,
-          "CurrentLocation": 4.342537,
-          "MinerState": 20
+          "MinedCash": 831.73732757568359,
+          "CurrentLocation": 8.031518,
+          "MinerState": 5
+        },
+        {
+          "MinedCash": 0.0,
+          "CurrentLocation": 0.151983261,
+          "MinerState": 10
         }
       ]
     }
   ],
   "Elevator": {
     "ElevatorLevel": 4,
-    "StoredCash": 14810.304412841797,
-    "LoadedCash": 2020.0,
-    "CurrentLocation": 5.68182373,
+    "StoredCash": 0.0,
+    "LoadedCash": 9330.0,
+    "CurrentLocation": 1.19209,
     "Manager": "EM1",
     "ElevatorState": 20
   },
   "Warehouse": {
-    "Level": 2,
+    "Level": 4,
     "Manager": "WHM1",
     "Transporters": [
       {
-        "LoadedCash": 1149.6955871582031,
-        "CurrentLocation": 10.0569668,
-        "TransporterState": 5
+        "LoadedCash": 0.0,
+        "CurrentLocation": 4.18897152,
+        "TransporterState": 10
+      },
+      {
+        "LoadedCash": 0.0,
+        "CurrentLocation": 0.0,
+        "TransporterState": 10
       }
     ]
   },
@@ -77,7 +105,7 @@
     ]
   },
   "IdleCash": 0.0,
-  "Cash": 14200.0,
+  "Cash": 124700.0,
   "SuperCash": 0.0,
-  "LastSaved": "2020-04-25T15:43:11.858712+05:00"
+  "LastSaved": "2020-06-17T00:52:50.331068+05:00"
 }

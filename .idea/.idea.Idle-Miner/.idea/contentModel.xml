@@ -955,20 +955,11 @@
               <e p="UnloadAllScenesExceptCommand.cs" t="Include" />
               <e p="UnloadSceneCommand.cs" t="Include" />
             </e>
-            <e p="Core.asmdef" t="Include" />
-            <e p="CoroutineRunner.cs" t="Include" />
-            <e p="FSM" t="Include">
-              <e p="StateBehaviour.cs" t="Include" />
-              <e p="StateMachineMediator.cs" t="Include" />
-            </e>
-            <e p="Installers" t="Include">
-              <e p="CoreContextInstaller.cs" t="Include" />
-              <e p="CoreContextSignals.cs" t="Include" />
-              <e p="CoreSceneInstaller.cs" t="Include" />
-            </e>
-            <e p="ISceneLoader.cs" t="Include" />
-            <e p="PromiseLoader.cs" t="Include" />
-            <e p="Scenes" t="Include">
+            <e p="Contexts" t="Include">
+              <e p="FSM" t="Include">
+                <e p="StateBehaviour.cs" t="Include" />
+                <e p="StateMachineMediator.cs" t="Include" />
+              </e>
               <e p="Popup" t="Include">
                 <e p="IPopupButtonData.cs" t="Include" />
                 <e p="IPopupConfig.cs" t="Include" />
@@ -978,6 +969,15 @@
                 <e p="PopupResult.cs" t="Include" />
               </e>
             </e>
+            <e p="Core.asmdef" t="Include" />
+            <e p="CoroutineRunner.cs" t="Include" />
+            <e p="Installers" t="Include">
+              <e p="CoreContextInstaller.cs" t="Include" />
+              <e p="CoreContextSignals.cs" t="Include" />
+              <e p="CoreSceneInstaller.cs" t="Include" />
+            </e>
+            <e p="ISceneLoader.cs" t="Include" />
+            <e p="PromiseLoader.cs" t="Include" />
             <e p="Thirdparty" t="Include">
               <e p="RSG.Promise.v1.3.0.0" t="Include">
                 <e p="EnumerableExt.cs" t="Include" />
@@ -996,6 +996,63 @@
               <e p="LoadStaticDataCommand.cs" t="Include" />
               <e p="LoadUserDataCommand.cs" t="Include" />
               <e p="SaveUserDataCommand.cs" t="Include" />
+            </e>
+            <e p="Contexts" t="Include">
+              <e p="Gameplay" t="Include">
+                <e p="GamePlayInstaller.cs" t="Include" />
+                <e p="GamePlayMediator.cs" t="Include" />
+                <e p="GamePlaySignals.cs" t="Include" />
+                <e p="States" t="Include">
+                  <e p="GamePlayState.cs" t="Include" />
+                  <e p="GamePlayStateDefault.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Hud" t="Include">
+                <e p="HudInstaller.cs" t="Include" />
+                <e p="HudMediator.cs" t="Include" />
+                <e p="HudSignals.cs" t="Include" />
+                <e p="States" t="Include">
+                  <e p="HudState.cs" t="Include" />
+                  <e p="HudStateStartUp.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Popup" t="Include">
+                <e p="Popup Configs" t="Include">
+                  <e p="MessagePopupConfig.cs" t="Include" />
+                  <e p="OkCancelPopupConfig.cs" t="Include" />
+                  <e p="PopupConfig.cs" t="Include" />
+                  <e p="YesNoPopupConfig.cs" t="Include" />
+                </e>
+                <e p="PopupButtonData.cs" t="Include" />
+                <e p="PopupData.cs" t="Include" />
+                <e p="PopupInstaller.cs" t="Include" />
+                <e p="PopupMediator.cs" t="Include" />
+                <e p="PopupResult" t="Include">
+                  <e p="MessagePopupResult.cs" t="Include" />
+                  <e p="OkCancelPopupResult.cs" t="Include" />
+                  <e p="YesNoPopupResult.cs" t="Include" />
+                </e>
+              </e>
+              <e p="ProjectScenes.cs" t="Include" />
+              <e p="Startup" t="Include">
+                <e p="Elements" t="Include">
+                  <e p="DefaultGameState.cs" t="Include" />
+                </e>
+                <e p="StartupInstaller.cs" t="Include" />
+                <e p="StartupMediator.cs" t="Include" />
+                <e p="StartupSignals.cs" t="Include" />
+                <e p="StartupView.cs" t="Include" />
+                <e p="States" t="Include">
+                  <e p="StartupState.cs" t="Include" />
+                  <e p="StartupStateCreateUserData.cs" t="Include" />
+                  <e p="StartupStateGamePlay.cs" t="Include" />
+                  <e p="StartupStateLoadGamePlay.cs" t="Include" />
+                  <e p="StartupStateLoadHud.cs" t="Include" />
+                  <e p="StartupStateLoadPopup.cs" t="Include" />
+                  <e p="StartupStateLoadStaticData.cs" t="Include" />
+                  <e p="StartupStateLoadUserData.cs" t="Include" />
+                </e>
+              </e>
             </e>
             <e p="Installers" t="Include">
               <e p="ProjectContextInstaller.cs" t="Include" />
@@ -1040,7 +1097,7 @@
               </e>
               <e p="StaticDataModel.cs" t="Include" />
             </e>
-            <e p="Scenes" t="Include">
+            <e p="Views" t="Include">
               <e p="Gameplay" t="Include">
                 <e p="Elements" t="Include">
                   <e p="CarrierView.cs" t="Include" />
@@ -1048,66 +1105,17 @@
                   <e p="ShaftView.cs" t="Include" />
                   <e p="WarehouseView.cs" t="Include" />
                 </e>
-                <e p="GamePlayInstaller.cs" t="Include" />
-                <e p="GamePlayMediator.cs" t="Include" />
-                <e p="GamePlaySignals.cs" t="Include" />
                 <e p="GamePlayView.cs" t="Include" />
-                <e p="States" t="Include">
-                  <e p="GamePlayState.cs" t="Include" />
-                  <e p="GamePlayStateDefault.cs" t="Include" />
-                </e>
               </e>
               <e p="Hud" t="Include">
                 <e p="Elements" t="Include">
                   <e p="TopPanelWidget.cs" t="Include" />
                 </e>
-                <e p="HudInstaller.cs" t="Include" />
-                <e p="HudMediator.cs" t="Include" />
-                <e p="HudSignals.cs" t="Include" />
                 <e p="HudView.cs" t="Include" />
-                <e p="States" t="Include">
-                  <e p="HudState.cs" t="Include" />
-                  <e p="HudStateStartUp.cs" t="Include" />
-                </e>
               </e>
               <e p="Popup" t="Include">
-                <e p="Popup Configs" t="Include">
-                  <e p="MessagePopupConfig.cs" t="Include" />
-                  <e p="OkCancelPopupConfig.cs" t="Include" />
-                  <e p="PopupConfig.cs" t="Include" />
-                  <e p="YesNoPopupConfig.cs" t="Include" />
-                </e>
-                <e p="PopupButtonData.cs" t="Include" />
-                <e p="PopupData.cs" t="Include" />
                 <e p="PopupDialogView.cs" t="Include" />
-                <e p="PopupInstaller.cs" t="Include" />
-                <e p="PopupMediator.cs" t="Include" />
-                <e p="PopupResult" t="Include">
-                  <e p="MessagePopupResult.cs" t="Include" />
-                  <e p="OkCancelPopupResult.cs" t="Include" />
-                  <e p="YesNoPopupResult.cs" t="Include" />
-                </e>
                 <e p="PopupView.cs" t="Include" />
-              </e>
-              <e p="ProjectScenes.cs" t="Include" />
-              <e p="Startup" t="Include">
-                <e p="Elements" t="Include">
-                  <e p="DefaultGameState.cs" t="Include" />
-                </e>
-                <e p="StartupInstaller.cs" t="Include" />
-                <e p="StartupMediator.cs" t="Include" />
-                <e p="StartupSignals.cs" t="Include" />
-                <e p="StartupView.cs" t="Include" />
-                <e p="States" t="Include">
-                  <e p="StartupState.cs" t="Include" />
-                  <e p="StartupStateCreateUserData.cs" t="Include" />
-                  <e p="StartupStateGamePlay.cs" t="Include" />
-                  <e p="StartupStateLoadGamePlay.cs" t="Include" />
-                  <e p="StartupStateLoadHud.cs" t="Include" />
-                  <e p="StartupStateLoadPopup.cs" t="Include" />
-                  <e p="StartupStateLoadStaticData.cs" t="Include" />
-                  <e p="StartupStateLoadUserData.cs" t="Include" />
-                </e>
               </e>
             </e>
           </e>
@@ -1123,5 +1131,7 @@
     </e>
     <e p="$USER_HOME$/Library/Caches/Rider2019.3/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/Library/Caches/Rider2019.3/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Idle-Miner.-143451144.00" t="ExcludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
   </component>
 </project>
