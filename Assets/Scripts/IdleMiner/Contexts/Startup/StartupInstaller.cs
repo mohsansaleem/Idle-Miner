@@ -1,5 +1,6 @@
 ﻿using PG.IdleMiner.Commands;
 using PG.IdleMiner.Models.MediatorModels;
+using PG.IdleMiner.Views.Startup;
 using RSG;
 using UnityEngine;
 using Zenject;

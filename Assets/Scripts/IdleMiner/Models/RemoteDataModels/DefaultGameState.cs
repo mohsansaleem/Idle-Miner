@@ -1,7 +1,7 @@
 ﻿using PG.IdleMiner.Models.DataModels;
 using UnityEngine;
 
-namespace PG.IdleMiner.Contexts.Startup
+namespace PG.IdleMiner.Models.RemoteDataModels
 {
     [CreateAssetMenu(menuName = "Idle Miner/Game State")]
     public class DefaultGameState : ScriptableObject

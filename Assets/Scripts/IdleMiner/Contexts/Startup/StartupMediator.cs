@@ -3,6 +3,7 @@ using PG.Core.Contexts;
 using PG.Core.Installers;
 using PG.IdleMiner.Models.MediatorModels;
 using PG.IdleMiner.Models.RemoteDataModels;
+using PG.IdleMiner.Views.Startup;
 using UniRx;
 using UnityEngine;
 using Zenject;

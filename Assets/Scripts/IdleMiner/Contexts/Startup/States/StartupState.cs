@@ -1,5 +1,6 @@
 ﻿using PG.Core.Contexts;
 using PG.IdleMiner.Models.MediatorModels;
+using PG.IdleMiner.Views.Startup;
 
 namespace PG.IdleMiner.Contexts.Startup
 {

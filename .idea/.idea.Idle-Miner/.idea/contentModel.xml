@@ -1638,13 +1638,9 @@
               </e>
               <e p="ProjectScenes.cs" t="Include" />
               <e p="Startup" t="Include">
-                <e p="Elements" t="Include">
-                  <e p="DefaultGameState.cs" t="Include" />
-                </e>
                 <e p="StartupInstaller.cs" t="Include" />
                 <e p="StartupMediator.cs" t="Include" />
                 <e p="StartupSignals.cs" t="Include" />
-                <e p="StartupView.cs" t="Include" />
                 <e p="States" t="Include">
                   <e p="StartupState.cs" t="Include" />
                   <e p="StartupStateCreateUserData.cs" t="Include" />
@@ -1693,6 +1689,7 @@
                 <e p="StartupModel.cs" t="Include" />
               </e>
               <e p="RemoteDataModels" t="Include">
+                <e p="DefaultGameState.cs" t="Include" />
                 <e p="ElevatorRemoteDataModel.cs" t="Include" />
                 <e p="RemoteDataModel.cs" t="Include" />
                 <e p="ShaftRemoteDataModel.cs" t="Include" />
@@ -1719,6 +1716,9 @@
               <e p="Popup" t="Include">
                 <e p="PopupDialogView.cs" t="Include" />
                 <e p="PopupView.cs" t="Include" />
+              </e>
+              <e p="Startup" t="Include">
+                <e p="StartupView.cs" t="Include" />
               </e>
             </e>
           </e>

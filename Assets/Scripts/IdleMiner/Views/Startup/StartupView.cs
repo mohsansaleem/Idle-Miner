@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using PG.IdleMiner.Models.RemoteDataModels;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace PG.IdleMiner.Contexts.Startup
+namespace PG.IdleMiner.Views.Startup
 {
     public class StartupView : MonoBehaviour
     {

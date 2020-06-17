@@ -1,4 +1,5 @@
 ﻿using PG.IdleMiner.Contexts.Startup;
+using PG.IdleMiner.Models.RemoteDataModels;
 using UnityEngine;
 using UnityEditor;
 

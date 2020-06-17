@@ -21,9 +21,10 @@ namespace PG.IdleMiner.Contexts.Startup
                 (
                     () =>
                     {
-                        //StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.PopupLoaded;
+                        StartupModel.LoadingProgress.Value = StartupModel.ELoadingProgress.LoadStaticData;
 
                         // Testing Popup
+                        /*
                         #if UNITY_EDITOR && DEBUG
                         Mediator.ShowPopup(YesNoPopupConfig.GetYesNoPopupConfig
                                           ("Start Game?", "Going to Start Game"))
@@ -42,6 +43,7 @@ namespace PG.IdleMiner.Contexts.Startup
                             }
                         });
                         #endif
+                        */
                     },
                     exception => { }
                 );
