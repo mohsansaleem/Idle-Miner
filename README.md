@@ -1,6 +1,12 @@
 # Idle Miner
 
 This is a simulation game with the raw UI. Primary purpose of this project was to implement an expandable code architecture. 
+All the data is persisted so we can continue from the point where we left and we can also tweak MetaData and add new levels in there.
+
+__Video__
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/AcuOT7PFa_A/0.jpg)](http://www.youtube.com/watch?v=AcuOT7PFa_A "Idle Miner")
+
 
 ##### Highlights:
   - Unity 2019.4.0f1
