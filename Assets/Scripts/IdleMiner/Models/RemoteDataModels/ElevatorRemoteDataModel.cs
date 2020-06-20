@@ -46,7 +46,7 @@ namespace PG.IdleMiner.Models.RemoteDataModels
             }
 
             // TODO: Move this to respective Facade.
-            Observable.Timer(TimeSpan.FromMilliseconds(Constants.FacadesTickTime)).Repeat().Subscribe((interval) => Tick()).AddTo(_disposables);
+            Observable.EveryFixedUpdate().Subscribe((interval) => Tick()).AddTo(_disposables);
         }
 
         public void Upgrade()

@@ -44,7 +44,7 @@ namespace PG.IdleMiner.Models.RemoteDataModels
             }
 
             // TODO: Move this to respective Facade.
-            Observable.Timer(TimeSpan.FromMilliseconds(Constants.FacadesTickTime)).Repeat().Subscribe((interval) => Tick()).AddTo(_disposables);
+            Observable.EveryFixedUpdate().Subscribe((interval) => Tick()).AddTo(_disposables);
         }
 
         public void Upgrade()
@@ -61,29 +61,16 @@ namespace PG.IdleMiner.Models.RemoteDataModels
             _remoteDataModel.UpdateCash(_remoteDataModel.Cash.Value + cash);
         }
 
+        float _previousStamp = float.MinValue;
         private void Tick()
         {
-            if (!(WarehouseRemoteData == null || WarehouseRemoteData.WarehouseLevelData == null))
+            if (WarehouseRemoteData?.WarehouseLevelData == null) return;
+            
+            while (WarehouseRemoteData.Transporters.Count < WarehouseRemoteData.WarehouseLevelData.Transporters)
             {
-                while (WarehouseRemoteData.Transporters.Count < WarehouseRemoteData.WarehouseLevelData.Transporters)
-                {
-                    WarehouseRemoteData.Transporters.Add(new TransporterRemoteData());
-                }
-                
-                foreach (TransporterRemoteData transporter in WarehouseRemoteData.Transporters)
-                {
-                    TransporterTick(transporter);
-                }
-
-                ReactiveWarehouse.SetValueAndForceNotify(WarehouseRemoteData);
+                WarehouseRemoteData.Transporters.Add(new TransporterRemoteData());
             }
-        }
-
-        // TODO: Not the best place to do this. Add respective Facades and then do this there. 
-        // For now doing it here.
-        float _previousStamp = float.MinValue;
-        private void TransporterTick(TransporterRemoteData transporter)
-        {
+            
             if (Math.Abs(_previousStamp - float.MinValue) < 0.0001f)
             {
                 _previousStamp = Time.time;
@@ -92,7 +79,19 @@ namespace PG.IdleMiner.Models.RemoteDataModels
 
             float interval = (Time.time - _previousStamp);
             _previousStamp = Time.time;
-            
+                
+            foreach (TransporterRemoteData transporter in WarehouseRemoteData.Transporters)
+            {
+                TransporterTick(transporter, interval);
+            }
+
+            ReactiveWarehouse.SetValueAndForceNotify(WarehouseRemoteData);
+        }
+
+        // TODO: Not the best place to do this. Add respective Facades and then do this there. 
+        // For now doing it here.
+        private void TransporterTick(TransporterRemoteData transporter, float interval)
+        {
             switch (transporter.TransporterState)
             {
                 case ETransporterState.Idle:
