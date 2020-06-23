@@ -61,7 +61,6 @@ namespace PG.IdleMiner.Models.RemoteDataModels
             _remoteDataModel.UpdateCash(_remoteDataModel.Cash.Value + cash);
         }
 
-        float _previousStamp = float.MinValue;
         private void Tick()
         {
             if (WarehouseRemoteData?.WarehouseLevelData == null) return;
@@ -71,14 +70,7 @@ namespace PG.IdleMiner.Models.RemoteDataModels
                 WarehouseRemoteData.Transporters.Add(new TransporterRemoteData());
             }
             
-            if (Math.Abs(_previousStamp - float.MinValue) < 0.0001f)
-            {
-                _previousStamp = Time.time;
-                return;
-            }
-
-            float interval = (Time.time - _previousStamp);
-            _previousStamp = Time.time;
+            float interval = Time.fixedDeltaTime;
                 
             foreach (TransporterRemoteData transporter in WarehouseRemoteData.Transporters)
             {

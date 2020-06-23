@@ -90,21 +90,12 @@ namespace PG.IdleMiner.Models.RemoteDataModels
 
         // TODO: Not the best place to do this. Add respective Facades and then do this there. 
         // For now doing it here.
-        float _previousStamp = float.MinValue;
         private void Tick()
         {
-            if (Math.Abs(_previousStamp - float.MinValue) < 0.0001f)
-            {
-                _previousStamp = Time.time;
-                return;
-            }
-
-            float interval = (Time.time - _previousStamp);
-            _previousStamp = Time.time;
-
             if (!(ElevatorRemoteData == null || ElevatorRemoteData.ElevatorLevelData == null))
             {
-                int shaftNumber = 1;
+                int shaftNumber;
+                float interval = Time.fixedDeltaTime;
 
                 ShaftRemoteDataModel shaft;
 

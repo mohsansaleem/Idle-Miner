@@ -75,24 +75,16 @@ namespace PG.IdleMiner.Models.RemoteDataModels
 
         // TODO: Not the best place to do this. Add respective Facades and then do this there. 
         // For now doing it here.
-        float _previousStamp = float.MinValue;
         private void Tick()
         {
-            if (Math.Abs(_previousStamp - float.MinValue) < 0.0001f)
-            {
-                _previousStamp = Time.time;
-                return;
-            }
-
-            float interval = (Time.time - _previousStamp);
-            _previousStamp = Time.time;
-            
             if (!(ShaftRemoteData == null || ShaftRemoteData.ShaftLevelData == null))
             {
                 while (ShaftRemoteData.Miners.Count < ShaftRemoteData.ShaftLevelData.Miners)
                 {
                     ShaftRemoteData.Miners.Add(new MinerRemoteData());
                 }
+                
+                float interval = Time.fixedDeltaTime;
                 
                 foreach (MinerRemoteData miner in ShaftRemoteData.Miners)
                 {
